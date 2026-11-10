@@ -34,6 +34,34 @@ def test_load_empty_directory(tmp_path: Path, capsys):
     assert main(["load", str(tmp_path)]) == 1
 
 
+def test_stats_table(sample_dir: Path, capsys):
+    assert main(["stats", str(sample_dir)]) == 0
+    output = capsys.readouterr().out
+    assert "olvashatóság" in output
+    assert "Leggyakoribb szavak a teljes gyűjteményben" in output
+    assert "Numerikus oszlopok – adatok.csv" in output
+
+
+def test_stats_json(sample_dir: Path, capsys):
+    assert main(["stats", str(sample_dir / "level.txt"), "--json", "--top", "3"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["level.txt"]["language"] in {"hu", "unknown"}
+    assert len(payload["level.txt"]["top_words"]) <= 3
+
+
+def test_stats_plot(sample_dir: Path, tmp_path: Path, capsys):
+    figures_dir = tmp_path / "abrak"
+    assert main(["stats", str(sample_dir), "--plot", "--figures-dir", str(figures_dir), "--prefix", "teszt"]) == 0
+    names = {path.name for path in figures_dir.glob("*.png")}
+    assert names == {
+        "teszt_gyakori_szavak.png",
+        "teszt_szohosszok.png",
+        "teszt_mondathosszok.png",
+        "teszt_terjedelem.png",
+        "teszt_olvashatosag.png",
+    }
+
+
 def test_formats(capsys):
     assert main(["formats"]) == 0
     assert ".pdf" in capsys.readouterr().out
