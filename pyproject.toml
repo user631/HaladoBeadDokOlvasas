@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "docproc"
+version = "0.1.0"
+description = "Automatikus dokumentumfeldolgozó rendszer PDF, TXT és CSV fájlokhoz"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.scripts]
+docproc = "docproc.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

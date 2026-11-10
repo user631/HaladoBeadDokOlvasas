@@ -1,0 +1,7 @@
+Ügyfélkód;Név;Város;E-mail;Telefon;Éves forgalom (Ft);Átlagos fizetési késés (nap)
+U001;Kovács és Társa Bt.;Szeged;kovacs.peter@example.com;+36 30 123 4567;4 250 000,50;3,5
+U002;Zöldmező Kertészet Kft.;Kecskemét;info@zoldmezo.example.com;+36 76 456 789;1 870 000;0
+U003;Balaton Panzió;Siófok;foglalas@balatonpanzio.example.com;+36 84 321 654;960 000;12,0
+U004;Mátra Autószerviz Kft.;Gyöngyös;szerviz@matraauto.example.com;+36 37 222 333;2 340 000;7,25
+U005;Tiszta Lap Könyvelőiroda;Debrecen;iroda@tisztalap.example.com;+36 52 444 555;3 115 000;1,0
+U006;Pécsi Pékség Bt.;Pécs;rendeles@pecsipekseg.example.com;+36 72 111 999;1 420 000;
