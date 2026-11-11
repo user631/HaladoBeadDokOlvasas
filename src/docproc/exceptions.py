@@ -19,6 +19,10 @@ class DocumentLoadError(DocProcError):
         super().__init__(f"Nem sikerült beolvasni: {self.path} – {reason}")
 
 
+class QuerySyntaxError(DocProcError):
+    pass
+
+
 class EmptyDocumentError(DocumentLoadError):
     def __init__(self, path: Path, reason: str = "a dokumentum nem tartalmaz kinyerhető szöveget"):
         super().__init__(path, reason)

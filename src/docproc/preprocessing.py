@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
+from collections.abc import Iterator
 from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
@@ -87,6 +88,12 @@ def clean_text(
 def tokenize(text: str, keep_numbers: bool = False) -> list[str]:
     pattern = _WORD_OR_NUMBER if keep_numbers else _WORD
     return pattern.findall(text)
+
+
+def iter_tokens(text: str, keep_numbers: bool = True) -> Iterator[tuple[str, int, int]]:
+    pattern = _WORD_OR_NUMBER if keep_numbers else _WORD
+    for match in pattern.finditer(text):
+        yield match.group(), match.start(), match.end()
 
 
 def split_paragraphs(text: str) -> list[str]:
