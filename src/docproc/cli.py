@@ -123,6 +123,107 @@ def cmd_stats(args: argparse.Namespace) -> int:
     return 0
 
 
+def _highlight_markers() -> tuple[str, str]:
+    if sys.stdout.isatty():
+        return "\033[1;33m", "\033[0m"
+    return "[", "]"
+
+
+def _index_options(args: argparse.Namespace) -> dict:
+    return {"stemming": not args.exact, "fold_accents": not args.exact}
+
+
+def cmd_search(args: argparse.Namespace) -> int:
+    from docproc.search import SearchIndex, regex_search
+
+    documents = list(iter_documents(args.path, recursive=not args.no_recursive))
+    if not documents:
+        print("Nem található beolvasható dokumentum.")
+        return 1
+    markers = _highlight_markers()
+
+    if args.regex:
+        matches = regex_search(documents, args.query, ignore_case=not args.case_sensitive, context=args.context, markers=markers)
+        print(f"{len(matches)} találat a(z) /{args.query}/ mintára ({len(documents)} dokumentumban keresve)\n")
+        for match in matches[: args.top] if args.top else matches:
+            print(f"{match.document.name}:{match.line_number}  {match.snippet}")
+        return 0 if matches else 1
+
+    index = SearchIndex.from_documents(documents, ranking=args.ranking, **_index_options(args))
+    hits = index.search(args.query, top_k=args.top, context=args.context, markers=markers)
+    print(
+        f"{len(hits)} találat a(z) „{args.query}” kifejezésre "
+        f"({len(index)} dokumentum, {index.vocabulary_size} kifejezés az indexben)\n"
+    )
+    for rank, hit in enumerate(hits, start=1):
+        counts = ", ".join(f"{term}×{count}" for term, count in hit.term_counts.items())
+        print(f"{rank}. {hit.document.name}  (pontszám: {hit.score:.3f}" + (f"; {counts})" if counts else ")"))
+        for snippet in hit.snippets:
+            print(f"   {snippet}")
+        print()
+    return 0 if hits else 1
+
+
+def cmd_count(args: argparse.Namespace) -> int:
+    from docproc.search import SearchIndex
+
+    documents = list(iter_documents(args.path, recursive=not args.no_recursive))
+    if not documents:
+        print("Nem található beolvasható dokumentum.")
+        return 1
+    index = SearchIndex.from_documents(documents, **_index_options(args))
+    table = index.keyword_counts(args.keywords)
+    table.loc["összesen"] = table.sum()
+    print(table.to_string())
+    return 0
+
+
+def cmd_extract(args: argparse.Namespace) -> int:
+    from docproc.extraction import ENTITY_LABELS, extract_information, results_to_frame
+
+    documents = list(iter_documents(args.path, recursive=not args.no_recursive))
+    if not documents:
+        print("Nem található beolvasható dokumentum.")
+        return 1
+    kinds = [kind.strip() for kind in args.kinds.split(",")] if args.kinds else None
+    try:
+        results = extract_information(documents, kinds=kinds, keyword_count=args.keywords)
+    except ValueError as exc:
+        print(f"Hiba: {exc}", file=sys.stderr)
+        return 2
+
+    if args.csv:
+        args.csv.parent.mkdir(parents=True, exist_ok=True)
+        results_to_frame(results).to_csv(args.csv, index=False, encoding="utf-8-sig")
+
+    if args.json:
+        payload = {
+            result.document.name: {
+                "entities": result.by_kind(),
+                "keywords": [{"term": term, "score": score} for term, score in result.keywords],
+            }
+            for result in results
+        }
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
+        return 0
+
+    for result in results:
+        print(f"=== {result.document.name} ===")
+        grouped = result.by_kind()
+        if not grouped and not result.keywords:
+            print("  (nem található kinyerhető adat)")
+        for kind, values in grouped.items():
+            print(f"  {ENTITY_LABELS[kind]}:")
+            for value in values:
+                print(f"    - {value}")
+        if result.keywords:
+            print("  Kulcsszavak: " + ", ".join(term for term, _ in result.keywords))
+        print()
+    if args.csv:
+        print(f"A kinyert adatok mentve: {args.csv}")
+    return 0
+
+
 def cmd_formats(args: argparse.Namespace) -> int:
     print("Támogatott formátumok: " + ", ".join(supported_extensions()))
     return 0
@@ -150,6 +251,38 @@ def build_parser() -> argparse.ArgumentParser:
     stats.add_argument("--figures-dir", type=Path, default=FIGURES_DIR, metavar="DIR", help="az ábrák mappája")
     stats.add_argument("--prefix", default=None, help="az ábrafájlok névelőtagja")
     stats.set_defaults(func=cmd_stats)
+
+    search = subparsers.add_parser("search", help="keresés a dokumentumokban")
+    search.add_argument("path", type=Path, help="fájl vagy mappa")
+    search.add_argument("query", help='keresőkifejezés, pl. \'szerződés AND (bérleti OR "havi díj") NOT számla\'')
+    search.add_argument("--top", type=int, default=10, metavar="K", help="legfeljebb K találat")
+    search.add_argument("--regex", action="store_true", help="a kifejezés reguláris kifejezés")
+    search.add_argument("--case-sensitive", action="store_true", help="kis- és nagybetű megkülönböztetése (regex)")
+    search.add_argument("--exact", action="store_true", help="szótövezés és ékezetfüggetlenség nélkül")
+    search.add_argument("--ranking", choices=("bm25", "tfidf"), default="bm25", help="rangsorolási módszer")
+    search.add_argument("--context", type=int, default=60, metavar="N", help="kontextus hossza karakterben")
+    search.add_argument("--no-recursive", action="store_true", help="az almappákat nem járja be")
+    search.set_defaults(func=cmd_search)
+
+    count = subparsers.add_parser("count", help="kulcsszavak előfordulása dokumentumonként")
+    count.add_argument("path", type=Path, help="fájl vagy mappa")
+    count.add_argument("keywords", nargs="+", help="kulcsszavak vagy többszavas kifejezések")
+    count.add_argument("--exact", action="store_true", help="szótövezés és ékezetfüggetlenség nélkül")
+    count.add_argument("--no-recursive", action="store_true", help="az almappákat nem járja be")
+    count.set_defaults(func=cmd_count)
+
+    extract = subparsers.add_parser("extract", help="információk kinyerése (e-mail, telefon, dátum, összeg, ...)")
+    extract.add_argument("path", type=Path, help="fájl vagy mappa")
+    extract.add_argument(
+        "--kinds",
+        help="csak a megadott adattípusok, vesszővel elválasztva "
+             "(email,url,phone,date,amount,percentage,iban,bank_account,tax_number,postal_address,company,field)",
+    )
+    extract.add_argument("--keywords", type=int, default=10, metavar="N", help="kulcsszavak száma (0 = kikapcsolva)")
+    extract.add_argument("--json", action="store_true", help="kimenet JSON formátumban")
+    extract.add_argument("--csv", type=Path, metavar="FÁJL", help="a kinyert adatok mentése CSV-be")
+    extract.add_argument("--no-recursive", action="store_true", help="az almappákat nem járja be")
+    extract.set_defaults(func=cmd_extract)
 
     formats = subparsers.add_parser("formats", help="támogatott fájlformátumok listája")
     formats.set_defaults(func=cmd_formats)

@@ -62,6 +62,60 @@ def test_stats_plot(sample_dir: Path, tmp_path: Path, capsys):
     }
 
 
+def test_search(sample_dir: Path, capsys):
+    assert main(["search", str(sample_dir), "számla"]) == 0
+    output = capsys.readouterr().out
+    assert "1 találat" in output
+    assert "level.txt" in output
+    assert "[számla]" in output
+
+
+def test_search_without_hits(sample_dir: Path, capsys):
+    assert main(["search", str(sample_dir), "nemletezoszo"]) == 1
+    assert "0 találat" in capsys.readouterr().out
+
+
+def test_search_invalid_query(sample_dir: Path, capsys):
+    assert main(["search", str(sample_dir), "(számla"]) == 2
+    assert "zárójel" in capsys.readouterr().err
+
+
+def test_search_regex(sample_dir: Path, capsys):
+    assert main(["search", str(sample_dir), r"B\w+a", "--regex"]) == 0
+    assert "adatok.csv:3" in capsys.readouterr().out
+
+
+def test_count(sample_dir: Path, capsys):
+    assert main(["count", str(sample_dir), "számla", "jegyzet"]) == 0
+    output = capsys.readouterr().out
+    assert "összesen" in output
+    assert "jegyzet" in output
+
+
+def test_extract(tmp_path: Path, capsys):
+    path = tmp_path / "szamla.txt"
+    path.write_text("Számlaszám: 2026/0142\nE-mail: info@example.com\nFizetendő: 138 049 Ft", encoding="utf-8")
+    csv_path = tmp_path / "ki" / "adatok.csv"
+    assert main(["extract", str(path), "--csv", str(csv_path)]) == 0
+    output = capsys.readouterr().out
+    assert "info@example.com" in output
+    assert "138 049 HUF" in output
+    assert csv_path.exists()
+
+
+def test_extract_selected_kinds_json(tmp_path: Path, capsys):
+    path = tmp_path / "a.txt"
+    path.write_text("Kapcsolat: info@example.com, +36 1 234 5678", encoding="utf-8")
+    assert main(["extract", str(path), "--kinds", "phone", "--keywords", "0", "--json"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["a.txt"]["entities"] == {"phone": ["+36 1 234 5678"]}
+    assert payload["a.txt"]["keywords"] == []
+
+
+def test_extract_unknown_kind(sample_dir: Path, capsys):
+    assert main(["extract", str(sample_dir), "--kinds", "nincs"]) == 2
+
+
 def test_formats(capsys):
     assert main(["formats"]) == 0
     assert ".pdf" in capsys.readouterr().out
