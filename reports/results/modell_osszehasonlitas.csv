@@ -1,0 +1,11 @@
+﻿model,vectorizer,modell,vektorizáló,f1_mean,f1_std,accuracy_mean,accuracy_std,fit_seconds
+linear_svm,tfidf,Lineáris SVM,TF-IDF,0.9091,0.0115,0.9113,0.0115,0.729
+logreg,tfidf,Logisztikus regresszió,TF-IDF,0.9081,0.0065,0.9101,0.007,1.493
+naive_bayes,bow,Naive Bayes,Bag-of-Words,0.9067,0.004,0.9087,0.0042,0.671
+knn,tfidf,k-legközelebbi szomszéd,TF-IDF,0.9011,0.0057,0.9036,0.0058,0.621
+naive_bayes,tfidf,Naive Bayes,TF-IDF,0.8948,0.0046,0.8983,0.0048,0.725
+logreg,bow,Logisztikus regresszió,Bag-of-Words,0.863,0.0107,0.8655,0.0111,1.503
+linear_svm,bow,Lineáris SVM,Bag-of-Words,0.8431,0.0073,0.8463,0.0079,0.985
+random_forest,tfidf,Random Forest,TF-IDF,0.8399,0.0154,0.841,0.016,12.185
+random_forest,bow,Random Forest,Bag-of-Words,0.8367,0.0105,0.8375,0.012,12.257
+knn,bow,k-legközelebbi szomszéd,Bag-of-Words,0.8187,0.009,0.8232,0.0093,0.609

@@ -1,0 +1,7 @@
+﻿label,documents,mean_words,median_words,min_words,max_words,share
+vallás,968,283.3,157.0,9,5430,0.179
+orvostudomány,943,204.5,92.0,8,4963,0.174
+sport,943,192.6,89.0,7,11117,0.174
+technológia,919,203.6,65.0,5,9190,0.17
+autók,897,122.2,77.0,7,4387,0.166
+politika,739,292.2,112.0,8,7950,0.137

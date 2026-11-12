@@ -143,3 +143,127 @@ def save_figure(figure: Figure, path: str | Path, dpi: int = 150) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(path, dpi=dpi, facecolor=SURFACE, metadata={"Software": None})
     return path
+
+
+def plot_class_distribution(summary: pd.DataFrame, title: str = "Dokumentumok kategóriánként") -> Figure:
+    ordered = summary.sort_values("documents")
+    figure, axes = _new_figure(7, max(2.5, 0.42 * len(ordered) + 1.2))
+    axes.barh(ordered.index, ordered["documents"], height=0.62, color=SERIES[0])
+    for label, count, share in zip(ordered.index, ordered["documents"], ordered["share"]):
+        axes.text(count, label, f" {count} ({share:.0%})", va="center", fontsize=9, color=TEXT_SECONDARY)
+    axes.set_xlim(right=ordered["documents"].max() * 1.18)
+    axes.grid(axis="x", color=GRID, linewidth=0.8)
+    axes.set_xlabel("dokumentumok száma")
+    _set_title(axes, title, f"összesen {int(ordered['documents'].sum())} dokumentum")
+    return figure
+
+
+def plot_document_lengths(frame: pd.DataFrame, title: str = "Dokumentumhosszok kategóriánként") -> Figure:
+    lengths = frame.assign(words=frame["text"].str.split().str.len())
+    order = lengths.groupby("label")["words"].median().sort_values().index.tolist()
+    data = [lengths.loc[lengths["label"] == label, "words"].to_numpy() for label in order]
+    figure, axes = _new_figure(7, max(2.5, 0.42 * len(order) + 1.2))
+    boxes = axes.boxplot(
+        data,
+        orientation="horizontal",
+        tick_labels=order,
+        showfliers=False,
+        patch_artist=True,
+        widths=0.55,
+        medianprops={"color": SURFACE, "linewidth": 2},
+        whiskerprops={"color": TEXT_SECONDARY},
+        capprops={"color": TEXT_SECONDARY},
+    )
+    for box in boxes["boxes"]:
+        box.set(facecolor=SERIES[0], edgecolor=SERIES[0])
+    axes.grid(axis="x", color=GRID, linewidth=0.8)
+    axes.set_xlabel("szavak száma (kiugró értékek nélkül)")
+    _set_title(axes, title, "a doboz a középső 50%-ot, a fehér vonal a mediánt jelöli")
+    return figure
+
+
+def plot_model_comparison(
+    table: pd.DataFrame,
+    metric: str = "f1_mean",
+    error: str = "f1_std",
+    title: str = "Modellek összehasonlítása (5-szörös keresztvalidáció)",
+) -> Figure:
+    vectorizers = list(dict.fromkeys(table["vektorizáló"]))
+    model_order = table.groupby("modell")[metric].max().sort_values().index.tolist()
+    figure, axes = _new_figure(7.5, max(3.0, 0.75 * len(model_order) + 1.4))
+    height = 0.8 / len(vectorizers)
+    for offset, (vectorizer, color) in enumerate(zip(vectorizers, SERIES)):
+        subset = table[table["vektorizáló"] == vectorizer].set_index("modell").reindex(model_order)
+        positions = [index - 0.4 + height * (offset + 0.5) for index in range(len(model_order))]
+        axes.barh(
+            positions,
+            subset[metric],
+            height=height * 0.88,
+            xerr=subset[error],
+            color=color,
+            label=vectorizer,
+            error_kw={"ecolor": TEXT_SECONDARY, "elinewidth": 1, "capsize": 2},
+        )
+    axes.set_yticks(range(len(model_order)), model_order)
+    lowest = float((table[metric] - table[error]).min())
+    axes.set_xlim(max(0.0, lowest - 0.05), 1.0)
+    axes.grid(axis="x", color=GRID, linewidth=0.8)
+    axes.set_xlabel("makro F1 (átlag ± szórás)")
+    legend = axes.legend(loc="lower right", frameon=False, fontsize=9)
+    for text in legend.get_texts():
+        text.set_color(TEXT_SECONDARY)
+    _set_title(axes, title, "magasabb = jobb")
+    return figure
+
+
+def plot_confusion_matrix(confusion: pd.DataFrame, title: str = "Tévesztési mátrix (teszthalmaz)") -> Figure:
+    from matplotlib.colors import LinearSegmentedColormap
+
+    counts = confusion.to_numpy()
+    row_share = counts / counts.sum(axis=1, keepdims=True).clip(min=1)
+    colormap = LinearSegmentedColormap.from_list("docproc_blue", ["#f4f8fd", SERIES[0], "#0f3d75"])
+    size = 1.0 + 0.85 * len(confusion)
+    figure, axes = _new_figure(size + 1.2, size)
+    image = axes.imshow(row_share, cmap=colormap, vmin=0, vmax=1)
+    for row in range(counts.shape[0]):
+        for column in range(counts.shape[1]):
+            color = SURFACE if row_share[row, column] > 0.55 else TEXT_PRIMARY
+            axes.text(column, row, f"{counts[row, column]}\n{row_share[row, column]:.0%}", ha="center", va="center", fontsize=8, color=color)
+    labels = list(confusion.index)
+    axes.set_xticks(range(len(labels)), labels, rotation=35, ha="right")
+    axes.set_yticks(range(len(labels)), labels)
+    axes.set_xlabel("becsült kategória")
+    axes.set_ylabel("valós kategória")
+    for spine in axes.spines.values():
+        spine.set_visible(False)
+    colorbar = figure.colorbar(image, ax=axes, fraction=0.046, pad=0.04)
+    colorbar.outline.set_visible(False)
+    colorbar.ax.tick_params(colors=TEXT_SECONDARY, labelsize=8, length=0)
+    colorbar.set_label("a valós kategória arányában", color=TEXT_SECONDARY, fontsize=9)
+    _set_title(axes, title, "cellánként: darabszám és sor szerinti arány")
+    return figure
+
+
+def plot_top_features(
+    features: dict[str, list[tuple[str, float]]],
+    title: str = "Legjellemzőbb szavak kategóriánként",
+    columns: int = 3,
+) -> Figure:
+    labels = list(features)
+    rows = max(1, -(-len(labels) // columns))
+    per_class = max((len(items) for items in features.values()), default=1)
+    figure = Figure(figsize=(3.4 * columns, rows * (0.28 * per_class + 1.0) + 0.6), facecolor=SURFACE, layout="constrained")
+    grid = figure.subplots(rows, columns, squeeze=False)
+    for axes in grid.flat:
+        _style_axes(axes)
+        axes.set_visible(False)
+    for axes, label in zip(grid.flat, labels):
+        axes.set_visible(True)
+        words = [word for word, _ in features[label]][::-1]
+        weights = [weight for _, weight in features[label]][::-1]
+        axes.barh(words, weights, height=0.62, color=SERIES[0])
+        axes.grid(axis="x", color=GRID, linewidth=0.8)
+        axes.set_title(label, loc="left", fontsize=10, fontweight="bold", color=TEXT_PRIMARY)
+        axes.tick_params(axis="x", labelsize=8)
+    figure.suptitle(title, x=0.01, ha="left", fontsize=12, fontweight="bold", color=TEXT_PRIMARY)
+    return figure

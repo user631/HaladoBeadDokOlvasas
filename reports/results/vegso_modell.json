@@ -1,0 +1,29 @@
+{
+  "adathalmaz": "20 Newsgroups (6 kategória)",
+  "nyelv": "en",
+  "modell": "linear_svm",
+  "modell_neve": "Lineáris SVM",
+  "vektorizáló": "tfidf",
+  "paraméterek": {
+    "classifier__C": "0.3",
+    "vectorizer__ngram_range": "(1, 2)"
+  },
+  "cv_f1": 0.9138,
+  "kategóriák": [
+    "autók",
+    "orvostudomány",
+    "politika",
+    "sport",
+    "technológia",
+    "vallás"
+  ],
+  "tanítóhalmaz": 4327,
+  "teszthalmaz": 1082,
+  "teszt_metrikák": {
+    "accuracy": 0.9279,
+    "precision_macro": 0.9279,
+    "recall_macro": 0.9248,
+    "f1_macro": 0.9259
+  },
+  "alapmodell_f1": 0.9037
+}

@@ -1,0 +1,10 @@
+{
+  "model": "naive_bayes",
+  "vectorizer": "tfidf",
+  "accuracy": 0.9076,
+  "precision_macro": 0.9168,
+  "recall_macro": 0.9001,
+  "f1_macro": 0.9037,
+  "train_seconds": 0.694,
+  "predict_seconds": 0.136
+}

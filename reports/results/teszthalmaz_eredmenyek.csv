@@ -1,0 +1,6 @@
+﻿modell,vektorizáló,cv_f1,model,vectorizer,accuracy,precision_macro,recall_macro,f1_macro,train_seconds,predict_seconds
+Lineáris SVM,TF-IDF,0.9091,linear_svm,tfidf,0.927,0.9256,0.9241,0.9246,0.781,0.135
+Logisztikus regresszió,TF-IDF,0.9081,logreg,tfidf,0.9196,0.9199,0.9164,0.9174,1.098,0.139
+Naive Bayes,Bag-of-Words,0.9067,naive_bayes,bow,0.9131,0.9138,0.9112,0.9116,0.685,0.135
+k-legközelebbi szomszéd,TF-IDF,0.9011,knn,tfidf,0.9214,0.9222,0.9181,0.9193,0.68,0.221
+Random Forest,TF-IDF,0.8399,random_forest,tfidf,0.8401,0.8506,0.8362,0.839,5.584,0.247
