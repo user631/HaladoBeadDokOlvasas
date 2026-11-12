@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from docproc.config import FIGURES_DIR
+from docproc.config import FIGURES_DIR, MODELS_DIR
 from docproc.exceptions import DocProcError
 from docproc.loaders import iter_documents, supported_extensions
 
@@ -224,6 +224,58 @@ def cmd_extract(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_classify(args: argparse.Namespace) -> int:
+    from docproc.classification import VECTORIZER_NAMES, DocumentClassifier
+    from docproc.preprocessing import detect_language
+
+    try:
+        classifier = DocumentClassifier.load(args.model)
+    except FileNotFoundError as exc:
+        print(f"Hiba: {exc}", file=sys.stderr)
+        return 2
+    documents = list(iter_documents(args.path, recursive=not args.no_recursive))
+    if not documents:
+        print("Nem található beolvasható dokumentum.")
+        return 1
+
+    metadata = classifier.metadata
+    model_language = metadata.get("nyelv")
+    rows = []
+    for document in documents:
+        scores = classifier.classify(document, top_k=args.top)
+        language = detect_language(document.text)
+        rows.append(
+            {
+                "név": document.name,
+                "kategória": scores[0][0],
+                "valószínűség": scores[0][1],
+                "további jelöltek": ", ".join(f"{label} ({score:.2f})" for label, score in scores[1:]),
+                "nyelv": language,
+                "eltérő nyelv": bool(model_language and language not in (model_language, "unknown")),
+                "pontszámok": scores,
+            }
+        )
+
+    if args.json:
+        payload = [{key: value for key, value in row.items() if key != "további jelöltek"} for row in rows]
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
+        return 0
+
+    if metadata:
+        f1 = metadata.get("teszt_metrikák", {}).get("f1_macro")
+        vectorizer = VECTORIZER_NAMES.get(metadata.get("vektorizáló"), metadata.get("vektorizáló", "?"))
+        print(f"Modell: {metadata.get('modell_neve', '?')} + {vectorizer}"
+              + (f" (teszt makro F1: {f1:.3f})" if f1 is not None else ""))
+        print(f"Kategóriák: {', '.join(classifier.labels)}\n")
+    table = pd.DataFrame(rows).drop(columns=["pontszámok", "eltérő nyelv"])
+    table["valószínűség"] = table["valószínűség"].map(lambda value: f"{value:.2f}")
+    print(table.to_string(index=False))
+    if any(row["eltérő nyelv"] for row in rows):
+        print(f"\nFigyelem: egyes dokumentumok nyelve eltér a modell tanítási nyelvétől ({model_language}), "
+              "ezeknél a besorolás nem megbízható.")
+    return 0
+
+
 def cmd_formats(args: argparse.Namespace) -> int:
     print("Támogatott formátumok: " + ", ".join(supported_extensions()))
     return 0
@@ -283,6 +335,14 @@ def build_parser() -> argparse.ArgumentParser:
     extract.add_argument("--csv", type=Path, metavar="FÁJL", help="a kinyert adatok mentése CSV-be")
     extract.add_argument("--no-recursive", action="store_true", help="az almappákat nem járja be")
     extract.set_defaults(func=cmd_extract)
+
+    classify = subparsers.add_parser("classify", help="dokumentumok kategorizálása a betanított modellel")
+    classify.add_argument("path", type=Path, help="fájl vagy mappa")
+    classify.add_argument("--model", type=Path, default=MODELS_DIR / "kategorizalo.joblib", help="a modellfájl útvonala")
+    classify.add_argument("--top", type=int, default=3, metavar="K", help="a K legvalószínűbb kategória")
+    classify.add_argument("--json", action="store_true", help="kimenet JSON formátumban")
+    classify.add_argument("--no-recursive", action="store_true", help="az almappákat nem járja be")
+    classify.set_defaults(func=cmd_classify)
 
     formats = subparsers.add_parser("formats", help="támogatott fájlformátumok listája")
     formats.set_defaults(func=cmd_formats)

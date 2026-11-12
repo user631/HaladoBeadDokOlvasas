@@ -1,0 +1,1 @@
+Does anyone know a good program to convert 3D models into high quality images? I need software that can render scenes with realistic lighting and export the files as PNG or JPEG. Our graphics card supports OpenGL, and the image format must work with our existing viewer.

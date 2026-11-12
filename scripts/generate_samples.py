@@ -10,6 +10,7 @@ from fpdf import FPDF
 from fpdf.enums import XPos, YPos
 
 DEFAULT_OUTPUT = Path(__file__).resolve().parents[1] / "data" / "samples"
+DEFAULT_ENGLISH_OUTPUT = Path(__file__).resolve().parents[1] / "data" / "demo_en"
 FONT_DIR = Path(matplotlib.get_data_path()) / "fonts" / "ttf"
 FIXED_DATE = datetime(2026, 11, 1, 9, 0, tzinfo=timezone.utc)
 
@@ -201,6 +202,40 @@ INVOICES = [
 ]
 
 
+ENGLISH_DEMO = {
+    "hockey_playoffs.txt": (
+        "What a night at the arena. The home team came back from two goals down in the third period and won "
+        "the playoff game in overtime. The goalie made forty saves, and the coach said the whole season was "
+        "about never giving up. Fans are already buying tickets for game five of the series."
+    ),
+    "used_car_advice.txt": (
+        "I am thinking about buying a used sedan with 120,000 miles on it. The dealer says the engine was "
+        "rebuilt last year and the brakes and tires are new. Should I worry about the transmission at that "
+        "mileage? I mostly drive on the highway and want something with good fuel economy."
+    ),
+    "migraine_treatment.txt": (
+        "My doctor prescribed a new medication for chronic migraine, but I am worried about the side effects. "
+        "Has anyone tried it? The clinical studies show it reduces the number of headache days, and my neurologist "
+        "said the risk to the liver is low if blood tests are done every few months."
+    ),
+    "rendering_software.txt": (
+        "Does anyone know a good program to convert 3D models into high quality images? I need software that "
+        "can render scenes with realistic lighting and export the files as PNG or JPEG. Our graphics card supports "
+        "OpenGL, and the image format must work with our existing viewer."
+    ),
+    "tax_debate.txt": (
+        "The president and congress are arguing again about the new tax bill. The administration claims it will "
+        "help the middle class, while critics in the senate say the government is spending too much. Voters will "
+        "decide in the next election whether this policy was the right one."
+    ),
+    "sunday_sermon.txt": (
+        "In his sermon on Sunday, the pastor spoke about faith, forgiveness and the meaning of grace. He read a "
+        "passage from the Gospel and reminded the congregation that the church is called to love God and to serve "
+        "the poor. Several Christians in our group discussed the Bible verses afterwards."
+    ),
+}
+
+
 class SamplePdf(FPDF):
     def __init__(self, title: str):
         super().__init__(format="A4")
@@ -276,11 +311,17 @@ def generate(output_dir: Path) -> list[Path]:
     return created
 
 
+def generate_english_demo(output_dir: Path) -> list[Path]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    return [write_text(output_dir / name, text + "\n", "utf-8") for name, text in ENGLISH_DEMO.items()]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Demó dokumentumok (PDF, TXT, CSV) generálása.")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT, help="kimeneti mappa")
+    parser.add_argument("--english-output", type=Path, default=DEFAULT_ENGLISH_OUTPUT, help="az angol nyelvű kategorizálási demó mappája")
     args = parser.parse_args()
-    for path in generate(args.output):
+    for path in generate(args.output) + generate_english_demo(args.english_output):
         print(f"Létrehozva: {path}")
 
 

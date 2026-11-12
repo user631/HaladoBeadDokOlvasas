@@ -116,6 +116,47 @@ def test_extract_unknown_kind(sample_dir: Path, capsys):
     assert main(["extract", str(sample_dir), "--kinds", "nincs"]) == 2
 
 
+def _train_tiny_model(path: Path) -> Path:
+    from docproc.classification import DocumentClassifier, build_pipeline
+
+    texts = ["goal team game season hockey"] * 5 + ["engine car dealer brake fuel"] * 5
+    labels = ["sport"] * 5 + ["autók"] * 5
+    pipeline = build_pipeline("logreg", "tfidf", min_df=1).fit(texts, labels)
+    metadata = {"modell_neve": "Logisztikus regresszió", "vektorizáló": "tfidf", "nyelv": "en", "teszt_metrikák": {"f1_macro": 1.0}}
+    return DocumentClassifier(pipeline, metadata).save(path)
+
+
+def test_classify(tmp_path: Path, capsys):
+    model = _train_tiny_model(tmp_path / "modell.joblib")
+    docs = tmp_path / "docs"
+    docs.mkdir()
+    (docs / "meccs.txt").write_text("The team scored a late goal and won the hockey game this season.", encoding="utf-8")
+    (docs / "auto.txt").write_text("The dealer said the car engine and the brake system are in good condition.", encoding="utf-8")
+    assert main(["classify", str(docs), "--model", str(model), "--top", "2"]) == 0
+    output = capsys.readouterr().out
+    assert "Logisztikus regresszió + TF-IDF" in output
+    lines = {line.split()[0]: line for line in output.splitlines() if line.strip().endswith(("en", "hu", "unknown"))}
+    assert "sport" in lines["meccs.txt"]
+    assert "autók" in lines["auto.txt"]
+
+
+def test_classify_warns_about_language(tmp_path: Path, capsys):
+    model = _train_tiny_model(tmp_path / "modell.joblib")
+    path = tmp_path / "level.txt"
+    path.write_text("A bérlő a szerződés szerint minden hónapban fizeti a bérleti díjat és a rezsit.", encoding="utf-8")
+    assert main(["classify", str(path), "--model", str(model), "--json"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload[0]["nyelv"] == "hu"
+    assert payload[0]["eltérő nyelv"] is True
+    assert main(["classify", str(path), "--model", str(model)]) == 0
+    assert "Figyelem" in capsys.readouterr().out
+
+
+def test_classify_missing_model(sample_dir: Path, tmp_path: Path, capsys):
+    assert main(["classify", str(sample_dir), "--model", str(tmp_path / "nincs.joblib")]) == 2
+    assert "train.py" in capsys.readouterr().err
+
+
 def test_formats(capsys):
     assert main(["formats"]) == 0
     assert ".pdf" in capsys.readouterr().out
