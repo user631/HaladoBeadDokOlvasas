@@ -216,32 +216,50 @@ def plot_model_comparison(
     return figure
 
 
-def plot_confusion_matrix(confusion: pd.DataFrame, title: str = "Tévesztési mátrix (teszthalmaz)") -> Figure:
+def plot_share_heatmap(
+    table: pd.DataFrame,
+    title: str,
+    subtitle: str = "cellánként: darabszám és sor szerinti arány",
+    xlabel: str = "",
+    ylabel: str = "",
+    colorbar_label: str = "a sor arányában",
+) -> Figure:
     from matplotlib.colors import LinearSegmentedColormap
 
-    counts = confusion.to_numpy()
+    counts = table.to_numpy()
     row_share = counts / counts.sum(axis=1, keepdims=True).clip(min=1)
     colormap = LinearSegmentedColormap.from_list("docproc_blue", ["#f4f8fd", SERIES[0], "#0f3d75"])
-    size = 1.0 + 0.85 * len(confusion)
-    figure, axes = _new_figure(size + 1.2, size)
+    width = 1.0 + 0.85 * table.shape[1]
+    height = 1.0 + 0.85 * table.shape[0]
+    figure, axes = _new_figure(width + 1.2, height)
     image = axes.imshow(row_share, cmap=colormap, vmin=0, vmax=1)
     for row in range(counts.shape[0]):
         for column in range(counts.shape[1]):
             color = SURFACE if row_share[row, column] > 0.55 else TEXT_PRIMARY
-            axes.text(column, row, f"{counts[row, column]}\n{row_share[row, column]:.0%}", ha="center", va="center", fontsize=8, color=color)
-    labels = list(confusion.index)
-    axes.set_xticks(range(len(labels)), labels, rotation=35, ha="right")
-    axes.set_yticks(range(len(labels)), labels)
-    axes.set_xlabel("becsült kategória")
-    axes.set_ylabel("valós kategória")
+            label = f"{counts[row, column]}\n{row_share[row, column]:.0%}"
+            axes.text(column, row, label, ha="center", va="center", fontsize=8, color=color)
+    axes.set_xticks(range(table.shape[1]), list(table.columns), rotation=35, ha="right")
+    axes.set_yticks(range(table.shape[0]), list(table.index))
+    axes.set_xlabel(xlabel)
+    axes.set_ylabel(ylabel)
     for spine in axes.spines.values():
         spine.set_visible(False)
     colorbar = figure.colorbar(image, ax=axes, fraction=0.046, pad=0.04)
     colorbar.outline.set_visible(False)
     colorbar.ax.tick_params(colors=TEXT_SECONDARY, labelsize=8, length=0)
-    colorbar.set_label("a valós kategória arányában", color=TEXT_SECONDARY, fontsize=9)
-    _set_title(axes, title, "cellánként: darabszám és sor szerinti arány")
+    colorbar.set_label(colorbar_label, color=TEXT_SECONDARY, fontsize=9)
+    _set_title(axes, title, subtitle)
     return figure
+
+
+def plot_confusion_matrix(confusion: pd.DataFrame, title: str = "Tévesztési mátrix (teszthalmaz)") -> Figure:
+    return plot_share_heatmap(
+        confusion,
+        title,
+        xlabel="becsült kategória",
+        ylabel="valós kategória",
+        colorbar_label="a valós kategória arányában",
+    )
 
 
 def plot_top_features(
@@ -265,5 +283,51 @@ def plot_top_features(
         axes.grid(axis="x", color=GRID, linewidth=0.8)
         axes.set_title(label, loc="left", fontsize=10, fontweight="bold", color=TEXT_PRIMARY)
         axes.tick_params(axis="x", labelsize=8)
+    figure.suptitle(title, x=0.01, ha="left", fontsize=12, fontweight="bold", color=TEXT_PRIMARY)
+    return figure
+
+
+def plot_k_selection(scores: pd.DataFrame, chosen_k: int | None = None, title: str = "A klaszterszám megválasztása") -> Figure:
+    figure = Figure(figsize=(9, 3.6), facecolor=SURFACE, layout="constrained")
+    panels = figure.subplots(1, 2)
+    for axes, column, label in zip(panels, ("inertia", "silhouette"), ("inercia (könyökmódszer, kisebb = tömörebb)", "sziluett-érték (magasabb = jobb)")):
+        _style_axes(axes)
+        axes.plot(scores["k"], scores[column], color=SERIES[0], linewidth=2, marker="o", markersize=6, markeredgecolor=SURFACE, markeredgewidth=2)
+        axes.grid(color=GRID, linewidth=0.8)
+        axes.set_xlabel("klaszterek száma (k)")
+        axes.set_xticks(scores["k"])
+        axes.set_title(label, loc="left", fontsize=10, color=TEXT_SECONDARY)
+        if chosen_k is not None:
+            axes.axvline(chosen_k, color=TEXT_SECONDARY, linewidth=1, linestyle="--")
+    figure.suptitle(title, x=0.01, ha="left", fontsize=12, fontweight="bold", color=TEXT_PRIMARY)
+    return figure
+
+
+def plot_cluster_map(
+    coordinates,
+    labels,
+    titles: dict | None = None,
+    title: str = "Dokumentumok két dimenzióban (TruncatedSVD)",
+    columns: int = 3,
+) -> Figure:
+    import numpy as np
+
+    coordinates = np.asarray(coordinates)
+    labels = np.asarray(labels)
+    groups = sorted(set(labels.tolist()), key=str)
+    rows = max(1, -(-len(groups) // columns))
+    figure = Figure(figsize=(3.3 * columns, 3.0 * rows + 0.5), facecolor=SURFACE, layout="constrained")
+    grid = figure.subplots(rows, columns, squeeze=False, sharex=True, sharey=True)
+    for axes in grid.flat:
+        _style_axes(axes)
+        axes.set_visible(False)
+    for axes, group in zip(grid.flat, groups):
+        axes.set_visible(True)
+        selected = labels == group
+        axes.scatter(coordinates[~selected, 0], coordinates[~selected, 1], s=4, color=GRID, linewidths=0)
+        axes.scatter(coordinates[selected, 0], coordinates[selected, 1], s=8, color=SERIES[0], alpha=0.7, linewidths=0)
+        heading = (titles or {}).get(group, str(group))
+        axes.set_title(f"{heading} ({int(selected.sum())} db)", loc="left", fontsize=9, fontweight="bold", color=TEXT_PRIMARY)
+        axes.tick_params(labelsize=7)
     figure.suptitle(title, x=0.01, ha="left", fontsize=12, fontweight="bold", color=TEXT_PRIMARY)
     return figure
