@@ -157,6 +157,42 @@ def test_classify_missing_model(sample_dir: Path, tmp_path: Path, capsys):
     assert "train.py" in capsys.readouterr().err
 
 
+def test_process(sample_dir: Path, tmp_path: Path, capsys):
+    output = tmp_path / "riport"
+    assert main(["process", str(sample_dir), "--output", str(output), "--model", str(tmp_path / "nincs.joblib")]) == 0
+    text = capsys.readouterr().out
+    assert "Feldolgozva: 4 dokumentum" in text
+    assert "nincs betanított modell" in text
+    assert {path.name for path in output.iterdir()} == {"riport.json", "dokumentumok.csv", "kinyert_adatok.csv", "riport.html"}
+
+
+def test_process_selected_formats(sample_dir: Path, tmp_path: Path, capsys):
+    output = tmp_path / "riport"
+    assert main(["process", str(sample_dir), "--output", str(output), "--formats", "json", "--no-classify", "--no-cluster"]) == 0
+    assert [path.name for path in output.iterdir()] == ["riport.json"]
+    assert main(["process", str(sample_dir), "--output", str(output), "--formats", "docx"]) == 2
+
+
+def test_cluster(tmp_path: Path, capsys):
+    texts = {
+        "a.txt": "számla fizetés határidő átutalás összeg",
+        "b.txt": "számla összeg átutalás fizetés",
+        "c.txt": "bérleti szerződés bérlő bérbeadó díj",
+        "d.txt": "szerződés bérlő bérbeadó felmondás",
+    }
+    for name, text in texts.items():
+        (tmp_path / name).write_text(text, encoding="utf-8")
+    assert main(["cluster", str(tmp_path), "--k", "2", "--language", "hu"]) == 0
+    output = capsys.readouterr().out
+    assert "2 csoport" in output
+    assert output.count("(2 dokumentum)") == 2
+
+
+def test_cluster_too_few_documents(tmp_path: Path, capsys):
+    (tmp_path / "a.txt").write_text("egyetlen dokumentum", encoding="utf-8")
+    assert main(["cluster", str(tmp_path)]) == 1
+
+
 def test_formats(capsys):
     assert main(["formats"]) == 0
     assert ".pdf" in capsys.readouterr().out

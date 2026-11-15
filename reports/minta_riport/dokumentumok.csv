@@ -1,0 +1,8 @@
+﻿név,típus,nyelv,oldalak,szavak,mondatok,LIX,olvashatóság,kinyert adatok,kategória,valószínűség,klaszter,kulcsszavak
+arajanlat_webfejlesztes.pdf,pdf,hu,1,97,21,63.4,nagyon nehéz,19,,,1,"óra, ajánlat, tervezése, debrecen, fejlesztése"
+berleti_szerzodes.pdf,pdf,hu,2,280,28,60.0,nagyon nehéz,17,,,1,"bérlő, bérbeadó, bérleti, szerződés, bérleti díj"
+jegyzokonyv_2026_10_15.txt,txt,hu,1,180,26,48.6,közepes,25,,,1,"kovács péter, értekezlet, dániel, horváth, horváth dániel"
+palyazati_felhivas_cp1250.txt,txt,hu,1,96,14,67.3,nagyon nehéz,13,,,2,"kisvállalkozások, támogatás, elszámolható, elszámolható költségek, kisvállalkozások digitális"
+szamla_2026_0142.pdf,pdf,hu,1,85,26,46.8,közepes,31,,,1,"dátuma, számla, átutalás, adószám, nettó"
+szamlak_2026.csv,csv,hu,1,35,7,47.9,közepes,16,,,0,"fizetve, nyitott, afa, brutto, esedekesseg"
+ugyfelek.csv,csv,hu,1,42,7,37.0,könnyű,16,,,0,"forgalom, gyöngyös, kecskemét, késés, nap"

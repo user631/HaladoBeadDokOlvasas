@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from docproc.config import FIGURES_DIR, MODELS_DIR
+from docproc.config import FIGURES_DIR, MODELS_DIR, PROJECT_ROOT
 from docproc.exceptions import DocProcError
 from docproc.loaders import iter_documents, supported_extensions
 
@@ -276,6 +276,82 @@ def cmd_classify(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_cluster(args: argparse.Namespace) -> int:
+    from collections import Counter
+
+    from docproc.clustering import cluster_documents
+    from docproc.preprocessing import detect_language
+
+    documents = list(iter_documents(args.path, recursive=not args.no_recursive))
+    if len(documents) < 3:
+        print("A csoportosításhoz legalább 3 beolvasható dokumentum kell.")
+        return 1
+    language = args.language
+    if language == "auto":
+        language = Counter(detect_language(document.text) for document in documents).most_common(1)[0][0]
+    try:
+        result = cluster_documents(
+            [document.text for document in documents],
+            k=args.k,
+            k_range=range(2, min(9, len(documents))),
+            language=language if language in ("hu", "en") else None,
+        )
+    except ValueError as exc:
+        print(f"Hiba: {exc}", file=sys.stderr)
+        return 2
+
+    print(f"K-Means csoportosítás: {result.k} csoport, sziluett-érték: {result.silhouette}")
+    if result.k_scores is not None:
+        print("A klaszterszámot a legjobb sziluett-érték alapján választotta: "
+              + ", ".join(f"k={row.k}: {row.silhouette:.3f}" for row in result.k_scores.itertuples()))
+    for cluster, description in result.describe(n_terms=6).items():
+        members = [document.name for document, label in zip(documents, result.labels) if label == cluster]
+        print(f"\nK{cluster} ({len(members)} dokumentum) – {description}")
+        for name in members:
+            print(f"  - {name}")
+    return 0
+
+
+def cmd_process(args: argparse.Namespace) -> int:
+    from docproc.pipeline import DocumentPipeline
+    from docproc.report import export_report
+
+    formats = [item.strip() for item in args.formats.split(",") if item.strip()]
+    pipeline = DocumentPipeline(
+        model_path=args.model,
+        use_classifier=not args.no_classify,
+        keyword_count=args.keywords,
+        use_clustering=not args.no_cluster,
+    )
+    report = pipeline.process(args.path, recursive=not args.no_recursive)
+    if not report.documents:
+        print("Nem található beolvasható dokumentum.")
+        return 1
+    output_dir = args.output or PROJECT_ROOT / "output" / (args.path.stem if args.path.is_file() else args.path.resolve().name)
+    try:
+        created = export_report(report, output_dir, formats)
+    except ValueError as exc:
+        print(f"Hiba: {exc}", file=sys.stderr)
+        return 2
+
+    summary = report.summary()
+    print(f"Feldolgozva: {summary['dokumentumok']} dokumentum ({', '.join(f'{count} {kind}' for kind, count in summary['típusok'].items())}), "
+          f"{summary['szavak összesen']} szó, {summary['kinyert adatok']} kinyert adat")
+    columns = ["név", "nyelv", "szavak", "LIX", "kinyert adatok", "kategória", "klaszter"]
+    print(report.statistics_frame()[columns].to_string(index=False))
+    notes = {item.category_note for item in report.documents if item.category_note}
+    for note in sorted(notes):
+        print(f"Kategorizálás: {note}")
+    if report.errors:
+        print(f"\nHibás fájlok ({len(report.errors)}):")
+        for error in report.errors:
+            print(f"  - {error['hiba']}")
+    print("\nLétrehozott fájlok:")
+    for path in created:
+        print(f"  {path}")
+    return 0
+
+
 def cmd_formats(args: argparse.Namespace) -> int:
     print("Támogatott formátumok: " + ", ".join(supported_extensions()))
     return 0
@@ -343,6 +419,24 @@ def build_parser() -> argparse.ArgumentParser:
     classify.add_argument("--json", action="store_true", help="kimenet JSON formátumban")
     classify.add_argument("--no-recursive", action="store_true", help="az almappákat nem járja be")
     classify.set_defaults(func=cmd_classify)
+
+    cluster = subparsers.add_parser("cluster", help="dokumentumok csoportosítása (K-Means)")
+    cluster.add_argument("path", type=Path, help="mappa")
+    cluster.add_argument("--k", type=int, default=None, help="a csoportok száma (alapértelmezés: automatikus, sziluett alapján)")
+    cluster.add_argument("--language", choices=("auto", "hu", "en"), default="auto", help="a stopszólista nyelve")
+    cluster.add_argument("--no-recursive", action="store_true", help="az almappákat nem járja be")
+    cluster.set_defaults(func=cmd_cluster)
+
+    process = subparsers.add_parser("process", help="teljes feldolgozás és riport (JSON, CSV, HTML)")
+    process.add_argument("path", type=Path, help="fájl vagy mappa")
+    process.add_argument("--output", type=Path, default=None, metavar="MAPPA", help="a riport mappája (alapértelmezés: output/<forrás neve>)")
+    process.add_argument("--formats", default="json,csv,html", help="kimeneti formátumok vesszővel elválasztva")
+    process.add_argument("--model", type=Path, default=MODELS_DIR / "kategorizalo.joblib", help="a kategorizáló modell")
+    process.add_argument("--no-classify", action="store_true", help="kategorizálás nélkül")
+    process.add_argument("--no-cluster", action="store_true", help="csoportosítás nélkül")
+    process.add_argument("--keywords", type=int, default=10, metavar="N", help="kulcsszavak száma dokumentumonként")
+    process.add_argument("--no-recursive", action="store_true", help="az almappákat nem járja be")
+    process.set_defaults(func=cmd_process)
 
     formats = subparsers.add_parser("formats", help="támogatott fájlformátumok listája")
     formats.set_defaults(func=cmd_formats)

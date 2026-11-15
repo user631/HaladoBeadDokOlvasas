@@ -1,0 +1,139 @@
+﻿document,kind,label,value,text,start,end
+arajanlat_webfejlesztes.pdf,field,Mezők (kulcs: érték),Ajánlat száma: AJ-2026-087,Ajánlat száma: AJ-2026-087,10,36
+arajanlat_webfejlesztes.pdf,field,Mezők (kulcs: érték),"Kelt: Debrecen, 2026. október 22.","Kelt: Debrecen, 2026. október 22.",37,70
+arajanlat_webfejlesztes.pdf,date,Dátumok,2026-10-22,2026. október 22.,53,70
+arajanlat_webfejlesztes.pdf,field,Mezők (kulcs: érték),Az ajánlat érvényes: 2026. november 21-ig.,Az ajánlat érvényes: 2026. november 21-ig.,71,113
+arajanlat_webfejlesztes.pdf,date,Dátumok,2026-11-21,2026. november 21,92,109
+arajanlat_webfejlesztes.pdf,field,Mezők (kulcs: érték),"Címzett: Kovács és Társa Bt., Kovács Péter ügyvezető részére","Címzett: Kovács és Társa Bt., Kovács Péter ügyvezető részére",114,174
+arajanlat_webfejlesztes.pdf,company,Cégnevek,Kovács és Társa Bt.,Kovács és Társa Bt.,123,142
+arajanlat_webfejlesztes.pdf,field,Mezők (kulcs: érték),"Ajánlattevő: Pixelfa Digitális Kft., 4025 Debrecen, Piac utca 30.","Ajánlattevő: Pixelfa Digitális Kft., 4025 Debrecen, Piac utca 30.",175,240
+arajanlat_webfejlesztes.pdf,company,Cégnevek,Pixelfa Digitális Kft.,Pixelfa Digitális Kft.,188,210
+arajanlat_webfejlesztes.pdf,postal_address,Postacímek,"4025 Debrecen, Piac utca 30","4025 Debrecen, Piac utca 30",212,239
+arajanlat_webfejlesztes.pdf,field,Mezők (kulcs: érték),"Kapcsolat: Tóth Gergely projektmenedzser, +36 20 987 6543","Kapcsolat: Tóth Gergely projektmenedzser, +36 20 987 6543",241,298
+arajanlat_webfejlesztes.pdf,phone,Telefonszámok,+36 20 987 6543,+36 20 987 6543,283,298
+arajanlat_webfejlesztes.pdf,email,E-mail-címek,toth.gergely@pixelfa.example.com,toth.gergely@pixelfa.example.com,300,332
+arajanlat_webfejlesztes.pdf,field,Mezők (kulcs: érték),Weboldal: https://www.pixelfa.example.com,Weboldal: https://www.pixelfa.example.com,333,374
+arajanlat_webfejlesztes.pdf,url,Webcímek,https://www.pixelfa.example.com,https://www.pixelfa.example.com,343,374
+arajanlat_webfejlesztes.pdf,field,Mezők (kulcs: érték),"Összesen: 3 835 000 Ft + ÁFA. A becsült átfutási idő 10 hét, a megrendeléstől számítva. Fizetési","Összesen: 3 835 000 Ft + ÁFA. A becsült átfutási idő 10 hét, a megrendeléstől számítva. Fizetési",818,914
+arajanlat_webfejlesztes.pdf,amount,Pénzösszegek,3 835 000 HUF,3 835 000 Ft,828,840
+arajanlat_webfejlesztes.pdf,percentage,Százalékok,30%,30%,925,928
+arajanlat_webfejlesztes.pdf,percentage,Százalékok,70%,70%,957,960
+berleti_szerzodes.pdf,company,Cégnevek,Duna Ingatlankezelő Zrt.,Duna Ingatlankezelő Zrt.,47,71
+berleti_szerzodes.pdf,tax_number,Adószámok,23456789-2-41,23456789-2-41,125,138
+berleti_szerzodes.pdf,company,Cégnevek,Kovács és Társa Bt.,Kovács és Társa Bt.,209,228
+berleti_szerzodes.pdf,postal_address,Postacímek,"6720 Szeged, Tisza Lajos körút 41","6720 Szeged, Tisza Lajos körút 41",240,273
+berleti_szerzodes.pdf,tax_number,Adószámok,87654321-1-06,87654321-1-06,285,298
+berleti_szerzodes.pdf,postal_address,Postacímek,"1054 Budapest, Szabadság tér 7","1054 Budapest, Szabadság tér 7",476,506
+berleti_szerzodes.pdf,date,Dátumok,2026-12-01,2026. december 1.,779,796
+berleti_szerzodes.pdf,date,Dátumok,2028-11-30,2028. november 30.,806,824
+berleti_szerzodes.pdf,date,Dátumok,2026-11-28,2026. november 28,861,878
+berleti_szerzodes.pdf,amount,Pénzösszegek,425 000 HUF,425 000 Ft,996,1006
+berleti_szerzodes.pdf,iban,IBAN-számlaszámok,HU42 1177 3016 1111 1018 0000 0000,"HU42 1177
+3016 1111 1018 0000 0000",1152,1186
+berleti_szerzodes.pdf,amount,Pénzösszegek,1 275 000 HUF,1 275 000 Ft,1282,1294
+berleti_szerzodes.pdf,email,E-mail-címek,berles@duna-ingatlan.example.com,berles@duna-ingatlan.example.com,2108,2140
+berleti_szerzodes.pdf,email,E-mail-címek,kovacs.peter@example.com,kovacs.peter@example.com,2149,2173
+berleti_szerzodes.pdf,date,Dátumok,2026-11-05,2026. november 5.,2277,2294
+berleti_szerzodes.pdf,company,Cégnevek,Duna Ingatlankezelő Zrt.,Duna Ingatlankezelő Zrt.,2373,2397
+berleti_szerzodes.pdf,company,Cégnevek,Kovács és Társa Bt.,Kovács és Társa Bt.,2408,2427
+jegyzokonyv_2026_10_15.txt,field,Mezők (kulcs: érték),"Készült: 2026. október 15-én, a Kovács és Társa Bt. szegedi irodájában (6720 Szeged, Tisza Lajos körút 41.)","Készült: 2026. október 15-én, a Kovács és Társa Bt. szegedi irodájában (6720 Szeged, Tisza Lajos körút 41.)",13,120
+jegyzokonyv_2026_10_15.txt,date,Dátumok,2026-10-15,2026. október 15,22,38
+jegyzokonyv_2026_10_15.txt,company,Cégnevek,Kovács és Társa Bt.,Kovács és Társa Bt.,45,64
+jegyzokonyv_2026_10_15.txt,postal_address,Postacímek,"6720 Szeged, Tisza Lajos körút 41","6720 Szeged, Tisza Lajos körút 41",85,118
+jegyzokonyv_2026_10_15.txt,field,Mezők (kulcs: érték),Tárgy: negyedéves vezetői értekezlet,Tárgy: negyedéves vezetői értekezlet,121,157
+jegyzokonyv_2026_10_15.txt,amount,Pénzösszegek,18 450 000 HUF,18 450 000 Ft,445,458
+jegyzokonyv_2026_10_15.txt,percentage,Százalékok,12%,12%,469,472
+jegyzokonyv_2026_10_15.txt,amount,Pénzösszegek,14 200 000 HUF,14 200 000 Ft,554,567
+jegyzokonyv_2026_10_15.txt,amount,Pénzösszegek,2 350 000 HUF,2 350 000 Ft,606,618
+jegyzokonyv_2026_10_15.txt,amount,Pénzösszegek,640 000 HUF,640 000 Ft,626,636
+jegyzokonyv_2026_10_15.txt,company,Cégnevek,Duna Ingatlankezelő Zrt.,Duna Ingatlankezelő Zrt.,730,754
+jegyzokonyv_2026_10_15.txt,amount,Pénzösszegek,425 000 HUF,425 000 Ft,833,843
+jegyzokonyv_2026_10_15.txt,field,Mezők (kulcs: érték),Határidő: a szerződés aláírása 2026. november 5-ig.,Határidő: a szerződés aláírása 2026. november 5-ig.,911,962
+jegyzokonyv_2026_10_15.txt,date,Dátumok,2026-11-05,2026. november 5,942,958
+jegyzokonyv_2026_10_15.txt,field,Mezők (kulcs: érték),Felelős: Kovács Péter.,Felelős: Kovács Péter.,963,985
+jegyzokonyv_2026_10_15.txt,company,Cégnevek,Pixelfa Digitális Kft.,Pixelfa Digitális Kft.,1130,1152
+jegyzokonyv_2026_10_15.txt,amount,Pénzösszegek,3 835 000 HUF,3 835 000 Ft,1156,1168
+jegyzokonyv_2026_10_15.txt,field,Mezők (kulcs: érték),Döntés: a további egyeztetésre Horváth Dániel kap megbízást.,Döntés: a további egyeztetésre Horváth Dániel kap megbízást.,1177,1237
+jegyzokonyv_2026_10_15.txt,field,Mezők (kulcs: érték),Határidő: 2026. november 20.,Határidő: 2026. november 20.,1238,1266
+jegyzokonyv_2026_10_15.txt,date,Dátumok,2026-11-20,2026. november 20.,1248,1266
+jegyzokonyv_2026_10_15.txt,field,Mezők (kulcs: érték),"Kérdés esetén elérhető: horvath.daniel@example.com, +36 70 555 1234.","Kérdés esetén elérhető: horvath.daniel@example.com, +36 70 555 1234.",1267,1335
+jegyzokonyv_2026_10_15.txt,email,E-mail-címek,horvath.daniel@example.com,horvath.daniel@example.com,1291,1317
+jegyzokonyv_2026_10_15.txt,phone,Telefonszámok,+36 70 555 1234,+36 70 555 1234,1319,1334
+jegyzokonyv_2026_10_15.txt,field,Mezők (kulcs: érték),Egyéb: a következő értekezlet időpontja 2027. január 14.,Egyéb: a következő értekezlet időpontja 2027. január 14.,1337,1393
+jegyzokonyv_2026_10_15.txt,date,Dátumok,2027-01-14,2027. január 14.,1377,1393
+palyazati_felhivas_cp1250.txt,field,Mezők (kulcs: érték),"Pályázók köre: Magyarországon bejegyzett, legalább két lezárt üzleti évvel rendelkező mikro- és","Pályázók köre: Magyarországon bejegyzett, legalább két lezárt üzleti évvel rendelkező mikro- és",268,363
+palyazati_felhivas_cp1250.txt,amount,Pénzösszegek,300 000 000 HUF,300 000 000 Ft,430,444
+palyazati_felhivas_cp1250.txt,field,Mezők (kulcs: érték),"A támogatás mértéke: az elszámolható költségek legfeljebb 50%-a, projektenként minimum 1 000 000 Ft","A támogatás mértéke: az elszámolható költségek legfeljebb 50%-a, projektenként minimum 1 000 000 Ft",450,549
+palyazati_felhivas_cp1250.txt,percentage,Százalékok,50%,50%,508,511
+palyazati_felhivas_cp1250.txt,amount,Pénzösszegek,1 000 000 HUF,1 000 000 Ft,537,549
+palyazati_felhivas_cp1250.txt,amount,Pénzösszegek,5 000 000 HUF,5 000 000 Ft,559,571
+palyazati_felhivas_cp1250.txt,percentage,Százalékok,30%,30%,712,715
+palyazati_felhivas_cp1250.txt,field,Mezők (kulcs: érték),"Benyújtási határidő: 2026. december 15., 16:00 óra.","Benyújtási határidő: 2026. december 15., 16:00 óra.",782,833
+palyazati_felhivas_cp1250.txt,date,Dátumok,2026-12-15,2026. december 15.,803,821
+palyazati_felhivas_cp1250.txt,url,Webcímek,https://palyazat.example.com,https://palyazat.example.com,882,910
+palyazati_felhivas_cp1250.txt,field,Mezők (kulcs: érték),"Tájékoztatás: palyazat@example.com, +36 1 765 4321 (munkanapokon 9 és 15 óra között).","Tájékoztatás: palyazat@example.com, +36 1 765 4321 (munkanapokon 9 és 15 óra között).",920,1005
+palyazati_felhivas_cp1250.txt,email,E-mail-címek,palyazat@example.com,palyazat@example.com,934,954
+palyazati_felhivas_cp1250.txt,phone,Telefonszámok,+36 1 765 4321,+36 1 765 4321,956,970
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),Számlaszám: 2026/0142,Számlaszám: 2026/0142,7,28
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),Kiállítás dátuma: 2026.10.15.,Kiállítás dátuma: 2026.10.15.,29,58
+szamla_2026_0142.pdf,date,Dátumok,2026-10-15,2026.10.15.,47,58
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),Teljesítés dátuma: 2026.10.14.,Teljesítés dátuma: 2026.10.14.,59,89
+szamla_2026_0142.pdf,date,Dátumok,2026-10-14,2026.10.14.,78,89
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),Fizetési határidő: 2026.10.29.,Fizetési határidő: 2026.10.29.,90,120
+szamla_2026_0142.pdf,date,Dátumok,2026-10-29,2026.10.29.,109,120
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),Fizetési mód: átutalás,Fizetési mód: átutalás,121,143
+szamla_2026_0142.pdf,company,Cégnevek,Napfény Irodaszer Kft.,Napfény Irodaszer Kft.,150,172
+szamla_2026_0142.pdf,postal_address,Postacímek,"1117 Budapest, Kőrösi utca 12","1117 Budapest, Kőrösi utca 12",173,202
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),Adószám: 12345678-2-43,Adószám: 12345678-2-43,204,226
+szamla_2026_0142.pdf,tax_number,Adószámok,12345678-2-43,12345678-2-43,213,226
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),Bankszámla (IBAN): HU42 1177 3016 1111 1018 0000 0000,Bankszámla (IBAN): HU42 1177 3016 1111 1018 0000 0000,227,280
+szamla_2026_0142.pdf,iban,IBAN-számlaszámok,HU42 1177 3016 1111 1018 0000 0000,HU42 1177 3016 1111 1018 0000 0000,246,280
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),E-mail: szamlazas@napfeny.example.com,E-mail: szamlazas@napfeny.example.com,281,318
+szamla_2026_0142.pdf,email,E-mail-címek,szamlazas@napfeny.example.com,szamlazas@napfeny.example.com,289,318
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),Telefon: +36 1 234 5678,Telefon: +36 1 234 5678,319,342
+szamla_2026_0142.pdf,phone,Telefonszámok,+36 1 234 5678,+36 1 234 5678,328,342
+szamla_2026_0142.pdf,company,Cégnevek,Kovács és Társa Bt.,Kovács és Társa Bt.,348,367
+szamla_2026_0142.pdf,postal_address,Postacímek,"6720 Szeged, Tisza Lajos körút 41","6720 Szeged, Tisza Lajos körút 41",368,401
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),Adószám: 87654321-1-06,Adószám: 87654321-1-06,403,425
+szamla_2026_0142.pdf,tax_number,Adószámok,87654321-1-06,87654321-1-06,412,425
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),"Kapcsolattartó: Kovács Péter (kovacs.peter@example.com, +36 30 123 4567)","Kapcsolattartó: Kovács Péter (kovacs.peter@example.com, +36 30 123 4567)",426,498
+szamla_2026_0142.pdf,email,E-mail-címek,kovacs.peter@example.com,kovacs.peter@example.com,456,480
+szamla_2026_0142.pdf,phone,Telefonszámok,+36 30 123 4567,+36 30 123 4567,482,497
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),Nettó összesen: 108 700 Ft,Nettó összesen: 108 700 Ft,708,734
+szamla_2026_0142.pdf,amount,Pénzösszegek,108 700 HUF,108 700 Ft,724,734
+szamla_2026_0142.pdf,percentage,Százalékok,27%,27%,740,743
+szamla_2026_0142.pdf,amount,Pénzösszegek,29 349 HUF,29 349 Ft,746,755
+szamla_2026_0142.pdf,field,Mezők (kulcs: érték),Fizetendő összesen: 138 049 Ft,Fizetendő összesen: 138 049 Ft,756,786
+szamla_2026_0142.pdf,amount,Pénzösszegek,138 049 HUF,138 049 Ft,776,786
+szamlak_2026.csv,date,Dátumok,2026-09-02,2026-09-02,98,108
+szamlak_2026.csv,date,Dátumok,2026-09-17,2026-09-17,111,121
+szamlak_2026.csv,company,Cégnevek,Zöldmező Kertészet Kft.,Zöldmező Kertészet Kft.,124,147
+szamlak_2026.csv,date,Dátumok,2026-09-18,2026-09-18,195,205
+szamlak_2026.csv,date,Dátumok,2026-10-03,2026-10-03,208,218
+szamlak_2026.csv,date,Dátumok,2026-09-30,2026-09-30,285,295
+szamlak_2026.csv,date,Dátumok,2026-10-15,2026-10-15,298,308
+szamlak_2026.csv,company,Cégnevek,Mátra Autószerviz Kft.,Mátra Autószerviz Kft.,311,333
+szamlak_2026.csv,date,Dátumok,2026-10-08,2026-10-08,382,392
+szamlak_2026.csv,date,Dátumok,2026-10-23,2026-10-23,395,405
+szamlak_2026.csv,date,Dátumok,2026-10-15,2026-10-15,479,489
+szamlak_2026.csv,date,Dátumok,2026-10-29,2026-10-29,492,502
+szamlak_2026.csv,company,Cégnevek,Kovács és Társa Bt.,Kovács és Társa Bt.,505,524
+szamlak_2026.csv,date,Dátumok,2026-10-27,2026-10-27,573,583
+szamlak_2026.csv,date,Dátumok,2026-11-11,2026-11-11,586,596
+szamlak_2026.csv,company,Cégnevek,Pécsi Pékség Bt.,Pécsi Pékség Bt.,599,615
+ugyfelek.csv,company,Cégnevek,Kovács és Társa Bt.,Kovács és Társa Bt.,102,121
+ugyfelek.csv,email,E-mail-címek,kovacs.peter@example.com,kovacs.peter@example.com,133,157
+ugyfelek.csv,phone,Telefonszámok,+36 30 123 4567,+36 30 123 4567,160,175
+ugyfelek.csv,company,Cégnevek,Zöldmező Kertészet Kft.,Zöldmező Kertészet Kft.,201,224
+ugyfelek.csv,email,E-mail-címek,info@zoldmezo.example.com,info@zoldmezo.example.com,239,264
+ugyfelek.csv,phone,Telefonszámok,+36 76 456 789,+36 76 456 789,267,281
+ugyfelek.csv,email,E-mail-címek,foglalas@balatonpanzio.example.com,foglalas@balatonpanzio.example.com,333,367
+ugyfelek.csv,phone,Telefonszámok,+36 84 321 654,+36 84 321 654,370,384
+ugyfelek.csv,company,Cégnevek,Mátra Autószerviz Kft.,Mátra Autószerviz Kft.,410,432
+ugyfelek.csv,email,E-mail-címek,szerviz@matraauto.example.com,szerviz@matraauto.example.com,446,475
+ugyfelek.csv,phone,Telefonszámok,+36 37 222 333,+36 37 222 333,478,492
+ugyfelek.csv,email,E-mail-címek,iroda@tisztalap.example.com,iroda@tisztalap.example.com,557,584
+ugyfelek.csv,phone,Telefonszámok,+36 52 444 555,+36 52 444 555,587,601
+ugyfelek.csv,company,Cégnevek,Pécsi Pékség Bt.,Pécsi Pékség Bt.,627,643
+ugyfelek.csv,email,E-mail-címek,rendeles@pecsipekseg.example.com,rendeles@pecsipekseg.example.com,653,685
+ugyfelek.csv,phone,Telefonszámok,+36 72 111 999,+36 72 111 999,688,702

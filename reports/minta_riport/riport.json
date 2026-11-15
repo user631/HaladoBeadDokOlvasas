@@ -1,0 +1,1335 @@
+{
+  "forrás": "data\\samples",
+  "készült": "2026-11-12T22:56:30",
+  "összesítés": {
+    "dokumentumok": 7,
+    "hibás fájlok": 0,
+    "típusok": {
+      "pdf": 3,
+      "txt": 2,
+      "csv": 2
+    },
+    "nyelvek": {
+      "hu": 7
+    },
+    "szavak összesen": 815,
+    "oldalak összesen": 8,
+    "kinyert adatok": 137,
+    "kategóriák": {},
+    "klaszterek": 3
+  },
+  "modell": {
+    "adathalmaz": "20 Newsgroups (6 kategória)",
+    "nyelv": "en",
+    "modell": "linear_svm",
+    "modell_neve": "Lineáris SVM",
+    "vektorizáló": "tfidf",
+    "paraméterek": {
+      "classifier__C": "0.3",
+      "vectorizer__ngram_range": "(1, 2)"
+    },
+    "cv_f1": 0.9138,
+    "kategóriák": [
+      "autók",
+      "orvostudomány",
+      "politika",
+      "sport",
+      "technológia",
+      "vallás"
+    ],
+    "tanítóhalmaz": 4327,
+    "teszthalmaz": 1082,
+    "teszt_metrikák": {
+      "accuracy": 0.9279,
+      "precision_macro": 0.9279,
+      "recall_macro": 0.9248,
+      "f1_macro": 0.9259
+    },
+    "alapmodell_f1": 0.9037,
+    "tanítás_ideje": "2026-11-11T14:11:58"
+  },
+  "gyakori_szavak": [
+    {
+      "szó": "kovács",
+      "darab": 14
+    },
+    {
+      "szó": "bérleti",
+      "darab": 9
+    },
+    {
+      "szó": "szerződés",
+      "darab": 9
+    },
+    {
+      "szó": "bérlő",
+      "darab": 9
+    },
+    {
+      "szó": "társa",
+      "darab": 7
+    },
+    {
+      "szó": "péter",
+      "darab": 7
+    },
+    {
+      "szó": "óra",
+      "darab": 7
+    },
+    {
+      "szó": "bérbeadó",
+      "darab": 7
+    },
+    {
+      "szó": "november",
+      "darab": 6
+    },
+    {
+      "szó": "fizetési",
+      "darab": 6
+    },
+    {
+      "szó": "díj",
+      "darab": 5
+    },
+    {
+      "szó": "áfa",
+      "darab": 5
+    },
+    {
+      "szó": "ügyvezető",
+      "darab": 4
+    },
+    {
+      "szó": "digitális",
+      "darab": 4
+    },
+    {
+      "szó": "oldal",
+      "darab": 4
+    },
+    {
+      "szó": "budapest",
+      "darab": 4
+    },
+    {
+      "szó": "adószám",
+      "darab": 4
+    },
+    {
+      "szó": "szeged",
+      "darab": 4
+    },
+    {
+      "szó": "értekezlet",
+      "darab": 4
+    },
+    {
+      "szó": "határidő",
+      "darab": 4
+    }
+  ],
+  "csoportosítás": {
+    "k": 3,
+    "sziluett": 0.3011,
+    "klaszterek": {
+      "0": {
+        "kulcsszavak": [
+          "fizetve",
+          "nyitott",
+          "zöldmező",
+          "kertészet",
+          "tiszta",
+          "balaton",
+          "könyvelőiroda",
+          "mátra"
+        ],
+        "dokumentumok": [
+          "szamlak_2026.csv",
+          "ugyfelek.csv"
+        ]
+      },
+      "1": {
+        "kulcsszavak": [
+          "kovács",
+          "péter",
+          "fizetési",
+          "szerződés",
+          "november",
+          "áfa",
+          "összesen",
+          "adószám"
+        ],
+        "dokumentumok": [
+          "arajanlat_webfejlesztes.pdf",
+          "berleti_szerzodes.pdf",
+          "jegyzokonyv_2026_10_15.txt",
+          "szamla_2026_0142.pdf"
+        ]
+      },
+      "2": {
+        "kulcsszavak": [
+          "kisvállalkozások",
+          "támogatás",
+          "legfeljebb",
+          "mikro",
+          "elszámolható",
+          "költségek",
+          "óra",
+          "digitális"
+        ],
+        "dokumentumok": [
+          "palyazati_felhivas_cp1250.txt"
+        ]
+      }
+    }
+  },
+  "dokumentumok": [
+    {
+      "név": "arajanlat_webfejlesztes.pdf",
+      "útvonal": "data\\samples\\arajanlat_webfejlesztes.pdf",
+      "típus": "pdf",
+      "oldalak": 1,
+      "metaadatok": {
+        "title": "Árajánlat – webáruház fejlesztése",
+        "author": "Pixelfa Digitális Kft.",
+        "creator": "DocProc mintagenerátor",
+        "creation_date": "2026-11-01T09:00:00+00:00",
+        "page_count": 1,
+        "loader": "PdfLoader"
+      },
+      "statisztika": {
+        "language": "hu",
+        "char_count": 1019,
+        "char_count_no_spaces": 885,
+        "word_count": 97,
+        "unique_word_count": 75,
+        "content_word_count": 81,
+        "sentence_count": 21,
+        "paragraph_count": 1,
+        "number_count": 36,
+        "avg_word_length": 7.07,
+        "avg_sentence_length": 4.62,
+        "lexical_diversity": 0.773,
+        "hapax_count": 62,
+        "long_word_ratio": 0.588,
+        "lix": 63.4,
+        "readability": "nagyon nehéz",
+        "reading_time_min": 0.48,
+        "top_words": [
+          [
+            "óra",
+            5
+          ],
+          [
+            "árajánlat",
+            2
+          ],
+          [
+            "ajánlat",
+            2
+          ],
+          [
+            "debrecen",
+            2
+          ],
+          [
+            "kovács",
+            2
+          ],
+          [
+            "webáruház",
+            2
+          ],
+          [
+            "tervezése",
+            2
+          ],
+          [
+            "fejlesztése",
+            2
+          ],
+          [
+            "fizetési",
+            2
+          ],
+          [
+            "száma",
+            1
+          ]
+        ]
+      },
+      "kinyert_adatok": {
+        "field": [
+          "Ajánlat száma: AJ-2026-087",
+          "Kelt: Debrecen, 2026. október 22.",
+          "Az ajánlat érvényes: 2026. november 21-ig.",
+          "Címzett: Kovács és Társa Bt., Kovács Péter ügyvezető részére",
+          "Ajánlattevő: Pixelfa Digitális Kft., 4025 Debrecen, Piac utca 30.",
+          "Kapcsolat: Tóth Gergely projektmenedzser, +36 20 987 6543",
+          "Weboldal: https://www.pixelfa.example.com",
+          "Összesen: 3 835 000 Ft + ÁFA. A becsült átfutási idő 10 hét, a megrendeléstől számítva. Fizetési"
+        ],
+        "date": [
+          "2026-10-22",
+          "2026-11-21"
+        ],
+        "company": [
+          "Kovács és Társa Bt.",
+          "Pixelfa Digitális Kft."
+        ],
+        "postal_address": [
+          "4025 Debrecen, Piac utca 30"
+        ],
+        "phone": [
+          "+36 20 987 6543"
+        ],
+        "email": [
+          "toth.gergely@pixelfa.example.com"
+        ],
+        "url": [
+          "https://www.pixelfa.example.com"
+        ],
+        "amount": [
+          "3 835 000 HUF"
+        ],
+        "percentage": [
+          "30%",
+          "70%"
+        ]
+      },
+      "mezők": {
+        "Ajánlat száma": "AJ-2026-087",
+        "Kelt": "Debrecen, 2026. október 22.",
+        "Az ajánlat érvényes": "2026. november 21-ig.",
+        "Címzett": "Kovács és Társa Bt., Kovács Péter ügyvezető részére",
+        "Ajánlattevő": "Pixelfa Digitális Kft., 4025 Debrecen, Piac utca 30.",
+        "Kapcsolat": "Tóth Gergely projektmenedzser, +36 20 987 6543",
+        "Weboldal": "https://www.pixelfa.example.com",
+        "Összesen": "3 835 000 Ft + ÁFA. A becsült átfutási idő 10 hét, a megrendeléstől számítva. Fizetési"
+      },
+      "kulcsszavak": [
+        {
+          "szó": "óra",
+          "súly": 0.1254
+        },
+        {
+          "szó": "ajánlat",
+          "súly": 0.0604
+        },
+        {
+          "szó": "tervezése",
+          "súly": 0.0604
+        },
+        {
+          "szó": "debrecen",
+          "súly": 0.0501
+        },
+        {
+          "szó": "fejlesztése",
+          "súly": 0.0501
+        },
+        {
+          "szó": "webáruház",
+          "súly": 0.0501
+        },
+        {
+          "szó": "árajánlat",
+          "súly": 0.0501
+        },
+        {
+          "szó": "fizetési",
+          "súly": 0.0372
+        },
+        {
+          "szó": "adatbázis",
+          "súly": 0.0302
+        },
+        {
+          "szó": "ajánlattevő",
+          "súly": 0.0302
+        }
+      ],
+      "kategória": null,
+      "kategória_megjegyzés": "a dokumentum nyelve (hu) eltér a modell nyelvétől (en)",
+      "klaszter": 1
+    },
+    {
+      "név": "berleti_szerzodes.pdf",
+      "útvonal": "data\\samples\\berleti_szerzodes.pdf",
+      "típus": "pdf",
+      "oldalak": 2,
+      "metaadatok": {
+        "title": "Irodahelyiség bérleti szerződés",
+        "author": "Duna Ingatlankezelő Zrt.",
+        "creator": "DocProc mintagenerátor",
+        "creation_date": "2026-11-01T09:00:00+00:00",
+        "page_count": 2,
+        "loader": "PdfLoader"
+      },
+      "statisztika": {
+        "language": "hu",
+        "char_count": 2477,
+        "char_count_no_spaces": 2153,
+        "word_count": 280,
+        "unique_word_count": 168,
+        "content_word_count": 213,
+        "sentence_count": 28,
+        "paragraph_count": 2,
+        "number_count": 43,
+        "avg_word_length": 6.5,
+        "avg_sentence_length": 10.0,
+        "lexical_diversity": 0.6,
+        "hapax_count": 127,
+        "long_word_ratio": 0.5,
+        "lix": 60.0,
+        "readability": "nagyon nehéz",
+        "reading_time_min": 1.4,
+        "top_words": [
+          [
+            "bérlő",
+            9
+          ],
+          [
+            "bérleti",
+            8
+          ],
+          [
+            "szerződés",
+            7
+          ],
+          [
+            "bérbeadó",
+            7
+          ],
+          [
+            "budapest",
+            3
+          ],
+          [
+            "kovács",
+            3
+          ],
+          [
+            "helyiséget",
+            3
+          ],
+          [
+            "felek",
+            3
+          ],
+          [
+            "november",
+            3
+          ],
+          [
+            "díj",
+            3
+          ]
+        ]
+      },
+      "kinyert_adatok": {
+        "company": [
+          "Duna Ingatlankezelő Zrt.",
+          "Kovács és Társa Bt."
+        ],
+        "tax_number": [
+          "23456789-2-41",
+          "87654321-1-06"
+        ],
+        "postal_address": [
+          "6720 Szeged, Tisza Lajos körút 41",
+          "1054 Budapest, Szabadság tér 7"
+        ],
+        "date": [
+          "2026-12-01",
+          "2028-11-30",
+          "2026-11-28",
+          "2026-11-05"
+        ],
+        "amount": [
+          "425 000 HUF",
+          "1 275 000 HUF"
+        ],
+        "iban": [
+          "HU42 1177 3016 1111 1018 0000 0000"
+        ],
+        "email": [
+          "berles@duna-ingatlan.example.com",
+          "kovacs.peter@example.com"
+        ]
+      },
+      "mezők": {},
+      "kulcsszavak": [
+        {
+          "szó": "bérlő",
+          "súly": 0.1023
+        },
+        {
+          "szó": "bérbeadó",
+          "súly": 0.0795
+        },
+        {
+          "szó": "bérleti",
+          "súly": 0.0755
+        },
+        {
+          "szó": "szerződés",
+          "súly": 0.066
+        },
+        {
+          "szó": "bérleti díj",
+          "súly": 0.0341
+        },
+        {
+          "szó": "bérleti szerződés",
+          "súly": 0.0341
+        },
+        {
+          "szó": "felek",
+          "súly": 0.0341
+        },
+        {
+          "szó": "helyiséget",
+          "súly": 0.0341
+        },
+        {
+          "szó": "budapest",
+          "súly": 0.0283
+        },
+        {
+          "szó": "díj",
+          "súly": 0.0242
+        }
+      ],
+      "kategória": null,
+      "kategória_megjegyzés": "a dokumentum nyelve (hu) eltér a modell nyelvétől (en)",
+      "klaszter": 1
+    },
+    {
+      "név": "jegyzokonyv_2026_10_15.txt",
+      "útvonal": "data\\samples\\jegyzokonyv_2026_10_15.txt",
+      "típus": "txt",
+      "oldalak": 1,
+      "metaadatok": {
+        "encoding": "utf-8",
+        "empty_lines": 8,
+        "loader": "TxtLoader"
+      },
+      "statisztika": {
+        "language": "hu",
+        "char_count": 1535,
+        "char_count_no_spaces": 1271,
+        "word_count": 180,
+        "unique_word_count": 125,
+        "content_word_count": 136,
+        "sentence_count": 26,
+        "paragraph_count": 9,
+        "number_count": 37,
+        "avg_word_length": 6.01,
+        "avg_sentence_length": 6.92,
+        "lexical_diversity": 0.694,
+        "hapax_count": 99,
+        "long_word_ratio": 0.417,
+        "lix": 48.6,
+        "readability": "közepes",
+        "reading_time_min": 0.9,
+        "top_words": [
+          [
+            "kovács",
+            5
+          ],
+          [
+            "értekezlet",
+            4
+          ],
+          [
+            "péter",
+            4
+          ],
+          [
+            "horváth",
+            3
+          ],
+          [
+            "dániel",
+            3
+          ],
+          [
+            "napirendi",
+            3
+          ],
+          [
+            "pont",
+            3
+          ],
+          [
+            "ügyvezető",
+            2
+          ],
+          [
+            "nagy",
+            2
+          ],
+          [
+            "eszter",
+            2
+          ]
+        ]
+      },
+      "kinyert_adatok": {
+        "field": [
+          "Készült: 2026. október 15-én, a Kovács és Társa Bt. szegedi irodájában (6720 Szeged, Tisza Lajos körút 41.)",
+          "Tárgy: negyedéves vezetői értekezlet",
+          "Határidő: a szerződés aláírása 2026. november 5-ig.",
+          "Felelős: Kovács Péter.",
+          "Döntés: a további egyeztetésre Horváth Dániel kap megbízást.",
+          "Határidő: 2026. november 20.",
+          "Kérdés esetén elérhető: horvath.daniel@example.com, +36 70 555 1234.",
+          "Egyéb: a következő értekezlet időpontja 2027. január 14."
+        ],
+        "date": [
+          "2026-10-15",
+          "2026-11-05",
+          "2026-11-20",
+          "2027-01-14"
+        ],
+        "company": [
+          "Kovács és Társa Bt.",
+          "Duna Ingatlankezelő Zrt.",
+          "Pixelfa Digitális Kft."
+        ],
+        "postal_address": [
+          "6720 Szeged, Tisza Lajos körút 41"
+        ],
+        "amount": [
+          "18 450 000 HUF",
+          "14 200 000 HUF",
+          "2 350 000 HUF",
+          "640 000 HUF",
+          "425 000 HUF",
+          "3 835 000 HUF"
+        ],
+        "percentage": [
+          "12%"
+        ],
+        "email": [
+          "horvath.daniel@example.com"
+        ],
+        "phone": [
+          "+36 70 555 1234"
+        ]
+      },
+      "mezők": {
+        "Készült": "2026. október 15-én, a Kovács és Társa Bt. szegedi irodájában (6720 Szeged, Tisza Lajos körút 41.)",
+        "Tárgy": "negyedéves vezetői értekezlet",
+        "Határidő": "a szerződés aláírása 2026. november 5-ig.",
+        "Felelős": "Kovács Péter.",
+        "Döntés": "a további egyeztetésre Horváth Dániel kap megbízást.",
+        "Kérdés esetén elérhető": "horvath.daniel@example.com, +36 70 555 1234.",
+        "Egyéb": "a következő értekezlet időpontja 2027. január 14."
+      },
+      "kulcsszavak": [
+        {
+          "szó": "kovács péter",
+          "súly": 0.0718
+        },
+        {
+          "szó": "értekezlet",
+          "súly": 0.0718
+        },
+        {
+          "szó": "dániel",
+          "súly": 0.0538
+        },
+        {
+          "szó": "horváth",
+          "súly": 0.0538
+        },
+        {
+          "szó": "horváth dániel",
+          "súly": 0.0538
+        },
+        {
+          "szó": "napirendi",
+          "súly": 0.0538
+        },
+        {
+          "szó": "napirendi pont",
+          "súly": 0.0538
+        },
+        {
+          "szó": "pont",
+          "súly": 0.0538
+        },
+        {
+          "szó": "péter",
+          "súly": 0.0442
+        },
+        {
+          "szó": "kovács",
+          "súly": 0.0426
+        }
+      ],
+      "kategória": null,
+      "kategória_megjegyzés": "a dokumentum nyelve (hu) eltér a modell nyelvétől (en)",
+      "klaszter": 1
+    },
+    {
+      "név": "palyazati_felhivas_cp1250.txt",
+      "útvonal": "data\\samples\\palyazati_felhivas_cp1250.txt",
+      "típus": "txt",
+      "oldalak": 1,
+      "metaadatok": {
+        "encoding": "cp1250",
+        "empty_lines": 6,
+        "loader": "TxtLoader"
+      },
+      "statisztika": {
+        "language": "hu",
+        "char_count": 1006,
+        "char_count_no_spaces": 878,
+        "word_count": 96,
+        "unique_word_count": 71,
+        "content_word_count": 70,
+        "sentence_count": 14,
+        "paragraph_count": 7,
+        "number_count": 22,
+        "avg_word_length": 7.64,
+        "avg_sentence_length": 6.86,
+        "lexical_diversity": 0.74,
+        "hapax_count": 59,
+        "long_word_ratio": 0.604,
+        "lix": 67.3,
+        "readability": "nagyon nehéz",
+        "reading_time_min": 0.48,
+        "top_words": [
+          [
+            "kisvállalkozások",
+            3
+          ],
+          [
+            "támogatás",
+            3
+          ],
+          [
+            "digitális",
+            2
+          ],
+          [
+            "mikro",
+            2
+          ],
+          [
+            "elszámolható",
+            2
+          ],
+          [
+            "költségek",
+            2
+          ],
+          [
+            "legfeljebb",
+            2
+          ],
+          [
+            "óra",
+            2
+          ],
+          [
+            "pályázati",
+            1
+          ],
+          [
+            "felhívás",
+            1
+          ]
+        ]
+      },
+      "kinyert_adatok": {
+        "field": [
+          "Pályázók köre: Magyarországon bejegyzett, legalább két lezárt üzleti évvel rendelkező mikro- és",
+          "A támogatás mértéke: az elszámolható költségek legfeljebb 50%-a, projektenként minimum 1 000 000 Ft",
+          "Benyújtási határidő: 2026. december 15., 16:00 óra.",
+          "Tájékoztatás: palyazat@example.com, +36 1 765 4321 (munkanapokon 9 és 15 óra között)."
+        ],
+        "amount": [
+          "300 000 000 HUF",
+          "1 000 000 HUF",
+          "5 000 000 HUF"
+        ],
+        "percentage": [
+          "50%",
+          "30%"
+        ],
+        "date": [
+          "2026-12-15"
+        ],
+        "url": [
+          "https://palyazat.example.com"
+        ],
+        "email": [
+          "palyazat@example.com"
+        ],
+        "phone": [
+          "+36 1 765 4321"
+        ]
+      },
+      "mezők": {
+        "Pályázók köre": "Magyarországon bejegyzett, legalább két lezárt üzleti évvel rendelkező mikro- és",
+        "A támogatás mértéke": "az elszámolható költségek legfeljebb 50%-a, projektenként minimum 1 000 000 Ft",
+        "Benyújtási határidő": "2026. december 15., 16:00 óra.",
+        "Tájékoztatás": "palyazat@example.com, +36 1 765 4321 (munkanapokon 9 és 15 óra között)."
+      },
+      "kulcsszavak": [
+        {
+          "szó": "kisvállalkozások",
+          "súly": 0.1023
+        },
+        {
+          "szó": "támogatás",
+          "súly": 0.1023
+        },
+        {
+          "szó": "elszámolható",
+          "súly": 0.0682
+        },
+        {
+          "szó": "elszámolható költségek",
+          "súly": 0.0682
+        },
+        {
+          "szó": "kisvállalkozások digitális",
+          "súly": 0.0682
+        },
+        {
+          "szó": "legfeljebb",
+          "súly": 0.0682
+        },
+        {
+          "szó": "mikro",
+          "súly": 0.0682
+        },
+        {
+          "szó": "mikro kisvállalkozások",
+          "súly": 0.0682
+        },
+        {
+          "szó": "költségek",
+          "súly": 0.0566
+        },
+        {
+          "szó": "óra",
+          "súly": 0.0566
+        }
+      ],
+      "kategória": null,
+      "kategória_megjegyzés": "a dokumentum nyelve (hu) eltér a modell nyelvétől (en)",
+      "klaszter": 2
+    },
+    {
+      "név": "szamla_2026_0142.pdf",
+      "útvonal": "data\\samples\\szamla_2026_0142.pdf",
+      "típus": "pdf",
+      "oldalak": 1,
+      "metaadatok": {
+        "title": "Számla 2026/0142",
+        "author": "Napfény Irodaszer Kft.",
+        "creator": "DocProc mintagenerátor",
+        "creation_date": "2026-11-01T09:00:00+00:00",
+        "page_count": 1,
+        "loader": "PdfLoader"
+      },
+      "statisztika": {
+        "language": "hu",
+        "char_count": 952,
+        "char_count_no_spaces": 812,
+        "word_count": 85,
+        "unique_word_count": 68,
+        "content_word_count": 68,
+        "sentence_count": 26,
+        "paragraph_count": 1,
+        "number_count": 64,
+        "avg_word_length": 6.02,
+        "avg_sentence_length": 3.27,
+        "lexical_diversity": 0.8,
+        "hapax_count": 56,
+        "long_word_ratio": 0.435,
+        "lix": 46.8,
+        "readability": "közepes",
+        "reading_time_min": 0.42,
+        "top_words": [
+          [
+            "számla",
+            2
+          ],
+          [
+            "dátuma",
+            2
+          ],
+          [
+            "fizetési",
+            2
+          ],
+          [
+            "átutalás",
+            2
+          ],
+          [
+            "adószám",
+            2
+          ],
+          [
+            "kovács",
+            2
+          ],
+          [
+            "nettó",
+            2
+          ],
+          [
+            "összesen",
+            2
+          ],
+          [
+            "számlaszám",
+            1
+          ],
+          [
+            "kiállítás",
+            1
+          ]
+        ]
+      },
+      "kinyert_adatok": {
+        "field": [
+          "Számlaszám: 2026/0142",
+          "Kiállítás dátuma: 2026.10.15.",
+          "Teljesítés dátuma: 2026.10.14.",
+          "Fizetési határidő: 2026.10.29.",
+          "Fizetési mód: átutalás",
+          "Adószám: 12345678-2-43",
+          "Bankszámla (IBAN): HU42 1177 3016 1111 1018 0000 0000",
+          "E-mail: szamlazas@napfeny.example.com",
+          "Telefon: +36 1 234 5678",
+          "Adószám: 87654321-1-06",
+          "Kapcsolattartó: Kovács Péter (kovacs.peter@example.com, +36 30 123 4567)",
+          "Nettó összesen: 108 700 Ft",
+          "Fizetendő összesen: 138 049 Ft"
+        ],
+        "date": [
+          "2026-10-15",
+          "2026-10-14",
+          "2026-10-29"
+        ],
+        "company": [
+          "Napfény Irodaszer Kft.",
+          "Kovács és Társa Bt."
+        ],
+        "postal_address": [
+          "1117 Budapest, Kőrösi utca 12",
+          "6720 Szeged, Tisza Lajos körút 41"
+        ],
+        "tax_number": [
+          "12345678-2-43",
+          "87654321-1-06"
+        ],
+        "iban": [
+          "HU42 1177 3016 1111 1018 0000 0000"
+        ],
+        "email": [
+          "szamlazas@napfeny.example.com",
+          "kovacs.peter@example.com"
+        ],
+        "phone": [
+          "+36 1 234 5678",
+          "+36 30 123 4567"
+        ],
+        "amount": [
+          "108 700 HUF",
+          "29 349 HUF",
+          "138 049 HUF"
+        ],
+        "percentage": [
+          "27%"
+        ]
+      },
+      "mezők": {
+        "Számlaszám": "2026/0142",
+        "Kiállítás dátuma": "2026.10.15.",
+        "Teljesítés dátuma": "2026.10.14.",
+        "Fizetési határidő": "2026.10.29.",
+        "Fizetési mód": "átutalás",
+        "Adószám": "12345678-2-43",
+        "Bankszámla (IBAN)": "HU42 1177 3016 1111 1018 0000 0000",
+        "E-mail": "szamlazas@napfeny.example.com",
+        "Telefon": "+36 1 234 5678",
+        "Kapcsolattartó": "Kovács Péter (kovacs.peter@example.com, +36 30 123 4567)",
+        "Nettó összesen": "108 700 Ft",
+        "Fizetendő összesen": "138 049 Ft"
+      },
+      "kulcsszavak": [
+        {
+          "szó": "dátuma",
+          "súly": 0.0723
+        },
+        {
+          "szó": "számla",
+          "súly": 0.0723
+        },
+        {
+          "szó": "átutalás",
+          "súly": 0.0723
+        },
+        {
+          "szó": "adószám",
+          "súly": 0.06
+        },
+        {
+          "szó": "nettó",
+          "súly": 0.06
+        },
+        {
+          "szó": "összesen",
+          "súly": 0.06
+        },
+        {
+          "szó": "fizetési",
+          "súly": 0.0445
+        },
+        {
+          "szó": "asztali",
+          "súly": 0.0362
+        },
+        {
+          "szó": "bankszámla",
+          "súly": 0.0362
+        },
+        {
+          "szó": "csomag",
+          "súly": 0.0362
+        }
+      ],
+      "kategória": null,
+      "kategória_megjegyzés": "a dokumentum nyelve (hu) eltér a modell nyelvétől (en)",
+      "klaszter": 1
+    },
+    {
+      "név": "szamlak_2026.csv",
+      "útvonal": "data\\samples\\szamlak_2026.csv",
+      "típus": "csv",
+      "oldalak": 1,
+      "metaadatok": {
+        "encoding": "utf-8",
+        "delimiter": ",",
+        "row_count": 6,
+        "column_count": 8,
+        "columns": [
+          "szamlaszam",
+          "kiallitas",
+          "esedekesseg",
+          "vevo",
+          "netto_ft",
+          "afa_ft",
+          "brutto_ft",
+          "statusz"
+        ],
+        "numeric_columns": [
+          "netto_ft",
+          "afa_ft",
+          "brutto_ft"
+        ],
+        "missing_values": 0,
+        "loader": "CsvLoader"
+      },
+      "statisztika": {
+        "language": "hu",
+        "char_count": 649,
+        "char_count_no_spaces": 533,
+        "word_count": 35,
+        "unique_word_count": 28,
+        "content_word_count": 27,
+        "sentence_count": 7,
+        "paragraph_count": 1,
+        "number_count": 66,
+        "avg_word_length": 5.94,
+        "avg_sentence_length": 5.0,
+        "lexical_diversity": 0.8,
+        "hapax_count": 23,
+        "long_word_ratio": 0.429,
+        "lix": 47.9,
+        "readability": "közepes",
+        "reading_time_min": 0.17,
+        "top_words": [
+          [
+            "fizetve",
+            3
+          ],
+          [
+            "nyitott",
+            2
+          ],
+          [
+            "szamlaszam",
+            1
+          ],
+          [
+            "kiallitas",
+            1
+          ],
+          [
+            "esedekesseg",
+            1
+          ],
+          [
+            "vevo",
+            1
+          ],
+          [
+            "netto",
+            1
+          ],
+          [
+            "afa",
+            1
+          ],
+          [
+            "brutto",
+            1
+          ],
+          [
+            "statusz",
+            1
+          ]
+        ]
+      },
+      "kinyert_adatok": {
+        "date": [
+          "2026-09-02",
+          "2026-09-17",
+          "2026-09-18",
+          "2026-10-03",
+          "2026-09-30",
+          "2026-10-15",
+          "2026-10-08",
+          "2026-10-23",
+          "2026-10-29",
+          "2026-10-27",
+          "2026-11-11"
+        ],
+        "company": [
+          "Zöldmező Kertészet Kft.",
+          "Mátra Autószerviz Kft.",
+          "Kovács és Társa Bt.",
+          "Pécsi Pékség Bt."
+        ]
+      },
+      "mezők": {},
+      "kulcsszavak": [
+        {
+          "szó": "fizetve",
+          "súly": 0.2651
+        },
+        {
+          "szó": "nyitott",
+          "súly": 0.1768
+        },
+        {
+          "szó": "afa",
+          "súly": 0.0884
+        },
+        {
+          "szó": "brutto",
+          "súly": 0.0884
+        },
+        {
+          "szó": "esedekesseg",
+          "súly": 0.0884
+        },
+        {
+          "szó": "kiallitas",
+          "súly": 0.0884
+        },
+        {
+          "szó": "netto",
+          "súly": 0.0884
+        },
+        {
+          "szó": "statusz",
+          "súly": 0.0884
+        },
+        {
+          "szó": "szamlaszam",
+          "súly": 0.0884
+        },
+        {
+          "szó": "vevo",
+          "súly": 0.0884
+        }
+      ],
+      "kategória": null,
+      "kategória_megjegyzés": "a dokumentum nyelve (hu) eltér a modell nyelvétől (en)",
+      "klaszter": 0
+    },
+    {
+      "név": "ugyfelek.csv",
+      "útvonal": "data\\samples\\ugyfelek.csv",
+      "típus": "csv",
+      "oldalak": 1,
+      "metaadatok": {
+        "encoding": "utf-8",
+        "delimiter": ";",
+        "row_count": 6,
+        "column_count": 7,
+        "columns": [
+          "Ügyfélkód",
+          "Név",
+          "Város",
+          "E-mail",
+          "Telefon",
+          "Éves forgalom (Ft)",
+          "Átlagos fizetési késés (nap)"
+        ],
+        "numeric_columns": [
+          "Éves forgalom (Ft)",
+          "Átlagos fizetési késés (nap)"
+        ],
+        "missing_values": 1,
+        "loader": "CsvLoader"
+      },
+      "statisztika": {
+        "language": "hu",
+        "char_count": 717,
+        "char_count_no_spaces": 592,
+        "word_count": 42,
+        "unique_word_count": 35,
+        "content_word_count": 30,
+        "sentence_count": 7,
+        "paragraph_count": 1,
+        "number_count": 41,
+        "avg_word_length": 5.14,
+        "avg_sentence_length": 6.0,
+        "lexical_diversity": 0.833,
+        "hapax_count": 32,
+        "long_word_ratio": 0.31,
+        "lix": 37.0,
+        "readability": "könnyű",
+        "reading_time_min": 0.21,
+        "top_words": [
+          [
+            "ügyfélkód",
+            1
+          ],
+          [
+            "név",
+            1
+          ],
+          [
+            "város",
+            1
+          ],
+          [
+            "e-mail",
+            1
+          ],
+          [
+            "telefon",
+            1
+          ],
+          [
+            "éves",
+            1
+          ],
+          [
+            "forgalom",
+            1
+          ],
+          [
+            "átlagos",
+            1
+          ],
+          [
+            "fizetési",
+            1
+          ],
+          [
+            "késés",
+            1
+          ]
+        ]
+      },
+      "kinyert_adatok": {
+        "company": [
+          "Kovács és Társa Bt.",
+          "Zöldmező Kertészet Kft.",
+          "Mátra Autószerviz Kft.",
+          "Pécsi Pékség Bt."
+        ],
+        "email": [
+          "kovacs.peter@example.com",
+          "info@zoldmezo.example.com",
+          "foglalas@balatonpanzio.example.com",
+          "szerviz@matraauto.example.com",
+          "iroda@tisztalap.example.com",
+          "rendeles@pecsipekseg.example.com"
+        ],
+        "phone": [
+          "+36 30 123 4567",
+          "+36 76 456 789",
+          "+36 84 321 654",
+          "+36 37 222 333",
+          "+36 52 444 555",
+          "+36 72 111 999"
+        ]
+      },
+      "mezők": {},
+      "kulcsszavak": [
+        {
+          "szó": "forgalom",
+          "súly": 0.0795
+        },
+        {
+          "szó": "gyöngyös",
+          "súly": 0.0795
+        },
+        {
+          "szó": "kecskemét",
+          "súly": 0.0795
+        },
+        {
+          "szó": "késés",
+          "súly": 0.0795
+        },
+        {
+          "szó": "nap",
+          "súly": 0.0795
+        },
+        {
+          "szó": "név",
+          "súly": 0.0795
+        },
+        {
+          "szó": "pécs",
+          "súly": 0.0795
+        },
+        {
+          "szó": "siófok",
+          "súly": 0.0795
+        },
+        {
+          "szó": "város",
+          "súly": 0.0795
+        },
+        {
+          "szó": "átlagos",
+          "súly": 0.0795
+        }
+      ],
+      "kategória": null,
+      "kategória_megjegyzés": "a dokumentum nyelve (hu) eltér a modell nyelvétől (en)",
+      "klaszter": 0
+    }
+  ],
+  "hibák": []
+}
