@@ -108,7 +108,7 @@ def _table(frame: pd.DataFrame) -> str:
     return f"<table><thead><tr>{header}</tr></thead><tbody>{''.join(rows)}</tbody></table>"
 
 
-def _summary_frame(report: CorpusReport) -> pd.DataFrame:
+def summary_frame(report: CorpusReport) -> pd.DataFrame:
     frame = report.statistics_frame()
     empty = [column for column in ("kategória", "valószínűség", "klaszter") if frame[column].replace("", None).isna().all()]
     return frame.drop(columns=empty)
@@ -175,7 +175,7 @@ def build_html(report: CorpusReport, include_figures: bool = True) -> str:
         f'<div class="muted">Forrás: {escape(str(report.source))} · Készült: {report.created_at:%Y.%m.%d. %H:%M}</div>',
         f'<div class="tiles">{tiles}</div>',
         "<h2>Összesítés</h2>",
-        _table(_summary_frame(report)) if report.documents else '<p class="note">Nincs feldolgozott dokumentum.</p>',
+        _table(summary_frame(report)) if report.documents else '<p class="note">Nincs feldolgozott dokumentum.</p>',
     ]
     if report.model_info:
         info = report.model_info

@@ -331,3 +331,17 @@ def plot_cluster_map(
         axes.tick_params(labelsize=7)
     figure.suptitle(title, x=0.01, ha="left", fontsize=12, fontweight="bold", color=TEXT_PRIMARY)
     return figure
+
+
+def plot_probabilities(scores: Sequence[tuple[str, float]], title: str = "Kategória-valószínűségek") -> Figure:
+    labels = [label for label, _ in scores][::-1]
+    values = [value for _, value in scores][::-1]
+    figure, axes = _new_figure(6, max(2.2, 0.38 * len(labels) + 1.1))
+    axes.barh(labels, values, height=0.62, color=SERIES[0])
+    for label, value in zip(labels, values):
+        axes.text(value, label, f" {value:.0%}", va="center", fontsize=9, color=TEXT_SECONDARY)
+    axes.set_xlim(0, 1.12)
+    axes.grid(axis="x", color=GRID, linewidth=0.8)
+    axes.set_xlabel("valószínűség")
+    _set_title(axes, title)
+    return figure
